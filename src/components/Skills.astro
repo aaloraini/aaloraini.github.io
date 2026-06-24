@@ -1,34 +1,76 @@
 ---
+const lead = {
+  label: 'Product & Growth',
+  items: [
+    'Product ownership',
+    'Product strategy & roadmap',
+    'Requirements & specs',
+    'MVP & launch',
+    'Prioritization',
+    'Analytics & retention',
+    'Monetization & pricing',
+  ],
+};
+
 const groups = [
   {
-    label: 'Product & Operations',
-    items: ['Planning & execution', 'Risk management', 'KPIs & reporting', 'Stakeholder alignment', 'Agile / Scrum', 'Vendor & field coordination'],
+    label: 'Delivery & Operations',
+    items: [
+      'Agile / Scrum',
+      'Project & operations management',
+      'Large-scale rollouts',
+      'Risk management',
+      'Stakeholder & vendor management',
+      'Cross-functional & team leadership',
+    ],
   },
   {
-    label: 'Software',
-    items: ['Swift / SwiftUI', 'Python', 'C++', 'Git & GitHub', 'WidgetKit', 'CloudKit'],
+    label: 'Software & Tools',
+    items: [
+      'Swift / SwiftUI',
+      'Python',
+      'C++',
+      'Xcode',
+      'Figma',
+      'KiCad',
+      'AutoCAD',
+      'Git & GitHub',
+      'Firebase',
+      'Excel',
+      'MS Project',
+    ],
   },
   {
     label: 'Electronics & Embedded',
-    items: ['PCB design (KiCad)', 'SMT manufacture', 'Arduino · ESP32 · Raspberry Pi', 'AVL / IoT / Teltonika', 'Troubleshooting & repair'],
-  },
-  {
-    label: 'Tools',
-    items: ['AutoCAD', 'Excel', 'Documentation', 'End-user training'],
+    items: [
+      'PCB design',
+      'SMT',
+      'MSP430',
+      'Embedded (ESP32, Arduino, RPi)',
+      'AVL / IoT',
+      'Troubleshooting & repair',
+    ],
   },
 ];
 ---
 
 <section class="section" id="skills">
   <div class="wrap">
-    <p class="eyebrow"><span class="num">03</span> Skills <span class="bar"></span></p>
+    <h2 class="eyebrow"><span class="num" aria-hidden="true">03</span> Skills <span class="bar" aria-hidden="true"></span></h2>
 
-    <div class="grid">
+    <div class="skills">
+      <div class="sgroup sgroup--lead">
+        <h3 class="sgroup__label">{lead.label}</h3>
+        <ul class="pills">
+          {lead.items.map((i) => <li class="pill">{i}</li>)}
+        </ul>
+      </div>
+
       {groups.map((g) => (
-        <div class="group">
-          <h3 class="group__label">{g.label}</h3>
-          <ul class="group__items">
-            {g.items.map((it) => <li>{it}</li>)}
+        <div class="sgroup">
+          <h3 class="sgroup__label">{g.label}</h3>
+          <ul class="pills">
+            {g.items.map((i) => <li class="pill">{i}</li>)}
           </ul>
         </div>
       ))}
@@ -37,39 +79,33 @@ const groups = [
 </section>
 
 <style>
-  .grid {
+  .skills {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(2rem, 5vw, 3.5rem) clamp(2rem, 6vw, 5rem);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: clamp(2rem, 5vw, 3.25rem) clamp(2rem, 5vw, 4rem);
   }
-  .group__label {
+  .sgroup--lead { grid-column: 1 / -1; }
+  .sgroup__label {
     font-size: 1.4rem;
     letter-spacing: -0.01em;
     padding-bottom: 0.9rem;
     border-bottom: 1.5px solid var(--line-strong);
-    margin-bottom: 1.1rem;
+    margin-bottom: 1.25rem;
   }
-  .group__items {
+  .pills {
     list-style: none;
     display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
-  .group__items li {
-    position: relative;
-    padding-left: 1.3rem;
-    color: var(--muted);
+  .pill {
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: 0.45rem 0.9rem;
+    transition: border-color 0.18s ease;
   }
-  .group__items li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.65em;
-    width: 0.5rem;
-    height: 1.5px;
-    background: var(--accent);
-  }
-  @media (max-width: 640px) {
-    .grid { grid-template-columns: 1fr; }
-  }
+  .pill:hover { border-color: var(--ink); }
 </style>

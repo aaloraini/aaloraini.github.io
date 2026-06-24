@@ -3,12 +3,16 @@ import { featured, more } from '../data/projects';
 import ProjectCard from './ProjectCard.astro';
 ---
 
-<section class="section" id="work">
+<section class="section work" id="work">
   <div class="wrap">
-    <p class="eyebrow"><span class="num">02</span> Selected work <span class="bar"></span></p>
+    <h2 class="eyebrow"><span class="num" aria-hidden="true">01</span> Selected work <span class="bar" aria-hidden="true"></span></h2>
 
-    <div class="featured">
-      {featured.map((project, i) => <ProjectCard project={project} index={i} />)}
+    <div class="stack">
+      {featured.map((project, i) => (
+        <div class="stack__item" style={`--i:${i}`}>
+          <ProjectCard project={project} index={i} />
+        </div>
+      ))}
     </div>
 
     <h3 class="more__heading">Also built</h3>
@@ -39,6 +43,25 @@ import ProjectCard from './ProjectCard.astro';
 </section>
 
 <style>
+  /* Sticky card-stack: each card pins, the next slides up and stacks over it.
+     Pure native vertical scroll; degrades to a plain list on small screens. */
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 6vw, 4.5rem);
+  }
+  .stack__item {
+    position: sticky;
+    top: calc(4.5rem + var(--i) * 0.9rem);
+  }
+  @media (max-width: 760px) {
+    .stack__item { position: static; }
+    .stack { gap: 1.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stack__item { position: static; }
+  }
+
   .more__heading {
     font-family: var(--font-mono);
     font-weight: 400;
@@ -46,7 +69,7 @@ import ProjectCard from './ProjectCard.astro';
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-top: clamp(2.5rem, 6vw, 4rem);
+    margin-top: clamp(3rem, 7vw, 5rem);
     margin-bottom: 1.5rem;
   }
   .more {
@@ -64,16 +87,8 @@ import ProjectCard from './ProjectCard.astro';
     flex-direction: column;
     gap: 0.6rem;
   }
-  .more__top {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.75rem;
-  }
-  .more__name {
-    font-size: 1.3rem;
-    letter-spacing: -0.01em;
-  }
+  .more__top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; }
+  .more__name { font-size: 1.3rem; letter-spacing: -0.01em; }
   .more__status {
     font-family: var(--font-mono);
     font-size: 0.68rem;

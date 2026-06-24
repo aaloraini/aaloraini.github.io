@@ -2,6 +2,7 @@
 import '@fontsource-variable/inter';
 import '@fontsource-variable/space-grotesk';
 import '../styles/global.css';
+import Nav from '../components/Nav.astro';
 
 interface Props {
   title?: string;
@@ -9,11 +10,12 @@ interface Props {
 }
 
 const {
-  title = 'Abdulhakim Aloraini — Project & Operations Engineer',
-  description = 'Abdulhakim Aloraini — project & operations manager and electronics engineer who ships products end to end: large-scale field rollouts, shipped App Store apps, and hardware.',
+  title = 'Abdulhakim Aloraini, Product & Operations Leader',
+  description = 'Abdulhakim Aloraini leads products end to end and builds them himself. A project & operations background (national rollouts), an electronics engineering degree, and shipped App Store apps. Targeting technical product management roles across Saudi Arabia, the Gulf, and remote.',
 } = Astro.props;
 
 const canonical = Astro.site?.href ?? 'https://aaloraini.github.io/';
+const ogImage = new URL('og.png', canonical).href;
 ---
 
 <!doctype html>
@@ -21,7 +23,16 @@ const canonical = Astro.site?.href ?? 'https://aaloraini.github.io/';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
+    </script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Abdulhakim Aloraini" />
@@ -31,11 +42,18 @@ const canonical = Astro.site?.href ?? 'https://aaloraini.github.io/';
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Abdulhakim Aloraini" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Abdulhakim Aloraini, Product & Operations Leader" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#faf8f3" />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf8f3" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141312" />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
+    <Nav />
     <slot />
   </body>
 </html>

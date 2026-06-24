@@ -1,68 +1,72 @@
 ---
 const roles = [
   {
-    org: 'Sahab',
-    place: 'Riyadh, KSA',
-    title: 'Project Operations Manager',
-    period: '2023 — 2025',
-    summary: 'Owned three national field deployments end to end.',
+    org: 'Four Hundred Entertainment',
+    place: 'Riyadh, KSA · Consulting',
+    title: 'Product Owner & IT Lead',
+    period: 'Dec 2024 to Feb 2025',
+    summary: 'Two-month consulting engagement on صن وحكم (Sunhakam), a platform for Baloot card-game cafes: player apps, a cafe portal, and a company admin portal.',
     points: [
-      'Led operations for MOH-Hajj 1445, SRCA AVL, and MC AVL — scope, schedule, resources, and risk.',
-      'Aligned KPIs daily with MOH and SRCA counterparts and kept phased rollouts on track across regions.',
-      'Coordinated field, back-office, and vendor teams; unblocked issues fast and closed actions with owners.',
-      'Shipped concise daily and weekly dashboards on incidents, performance, and SLAs.',
+      'Joined as Product Owner and IT Lead with the product stalled short of its first milestone.',
+      'Translated business requirements into clear specs for the technical team and re-prioritised the build, driving it to deliver the second milestone.',
+      'Owned a full system spanning the player apps, the cafe-facing admin portal, and the company admin portal.',
+      'Set up workflows for ongoing support, operational efficiency, and scalable growth.',
     ],
   },
   {
     org: 'Sahab',
     place: 'Riyadh, KSA',
-    title: 'Hardware Technician — MOH-Hajj 1444',
-    period: '2023',
-    summary: 'On-the-ground device deployment for the Hajj ambulance fleet.',
+    title: 'Project Operations Manager',
+    period: '2023 to 2025',
+    summary: 'Owned three national emergency-fleet deployments end to end.',
     points: [
-      'Configured devices from the BRD and installed AVL units on ambulances.',
-      'Onboarded vehicles to the AVL portal and verified live data flow.',
-      'Supported CAD dispatch and ePCR setup; trained dispatchers and medical staff on site.',
+      'MOH-Hajj 1445: equipped 300+ ambulances, trained 150+ medical crew, and ran 5+ operations and monitoring rooms across 2 Hajj regions, with 100% uptime and zero shutdowns through the season.',
+      'SRCA AVL and MC AVL: rolled out vehicle tracking to 3,000+ emergency vehicles (1,800+ and 1,200+) across all 13 regions of the country, with urgent incidents resolved inside the ~2-hour SLA.',
+      'Coordinated cross-functional teams of 8 to 15 (field, back-office, and vendors) and aligned KPIs daily with MOH and SRCA counterparts to keep phased rollouts on track.',
+      'Supported a Hajj season serving 1.8M+ people with no major incidents, backed by daily and weekly dashboards on performance and SLAs.',
+    ],
+  },
+  {
+    org: 'Sahab',
+    place: 'Riyadh, KSA',
+    title: 'Hardware Technician, MOH-Hajj 1444',
+    period: '2023',
+    summary: 'On-the-ground deployment for the Hajj ambulance fleet; grew from team member to owning the wrap-up.',
+    points: [
+      'Configured devices and installed AVL units on ambulances, onboarded vehicles to the portal, and verified live data flow.',
+      'Supported CAD dispatch and ePCR setup and trained dispatchers and medical staff on site.',
+      'When a misconfiguration stopped operations mid-season, I asked to take it on and cleared the blocker within an hour.',
+      'Closed the season owning the lessons-learned and the short recommendations to improve future operations.',
     ],
   },
   {
     org: 'Palmlab',
     place: 'Riyadh, KSA',
     title: 'Electronics Lab Supervisor & Scrum Master',
-    period: '2021 — 2023',
+    period: '2021 to 2023',
     summary: 'Ran the PCB manufacturing team and its delivery cadence.',
     points: [
-      'Led the PCB team: set priorities, removed blockers, kept throughput and quality in view.',
-      'Ran sprint planning and stand-ups as Scrum Master.',
+      'Led the PCB team across 12+ projects: set priorities, removed blockers, and kept throughput and quality in view.',
+      'Delivered 300+ PCBs and ran sprint planning and stand-ups as Scrum Master.',
       'Owned lab inventory and equipment; sourced components and instruments.',
     ],
   },
   {
-    org: 'MachinesTalk',
-    place: 'Riyadh, KSA',
-    title: 'Motorna Support / L2 Technical Support',
-    period: '2020 — 2021',
-    summary: 'Second-line support for IoT / M2M devices.',
+    org: 'Earlier',
+    title: 'Technical & field roles',
+    period: '2019 to 2021',
+    summary: 'Before moving into operations and product.',
     points: [
-      'Handled escalations, separating software from hardware causes quickly.',
-      'Read device logs, applied fixes, and documented outcomes for the dev team.',
-      'Diagnosed and repaired hardware to reduce customer downtime.',
+      'MachinesTalk, Motorna Support & L2 Technical Support (IoT / M2M): escalations, log diagnosis, and hardware repair.',
+      'Schlumberger Middle East, Electronics Lab Technician: repaired and calibrated electronics and sensors for drilling equipment.',
     ],
-  },
-  {
-    org: 'Schlumberger',
-    place: 'Dhahran, KSA',
-    title: 'Electronics Lab Technician',
-    period: '2019 — 2020',
-    summary: 'Repaired and calibrated electronics and sensors for drilling equipment.',
-    points: [],
   },
 ];
 ---
 
 <section class="section" id="experience">
   <div class="wrap">
-    <p class="eyebrow"><span class="num">01</span> Experience <span class="bar"></span></p>
+    <h2 class="eyebrow"><span class="num" aria-hidden="true">02</span> Experience <span class="bar" aria-hidden="true"></span></h2>
 
     <ol class="roles">
       {roles.map((r) => (
@@ -70,11 +74,11 @@ const roles = [
           <div class="role__meta">
             <p class="role__period">{r.period}</p>
             <p class="role__org">{r.org}</p>
-            <p class="role__place">{r.place}</p>
+            {r.place && <p class="role__place">{r.place}</p>}
           </div>
           <div class="role__body">
             <h3 class="role__title">{r.title}</h3>
-            <p class="role__summary">{r.summary}</p>
+            {r.summary && <p class="role__summary">{r.summary}</p>}
             {r.points.length > 0 && (
               <ul class="role__points">
                 {r.points.map((p) => <li>{p}</li>)}
@@ -88,15 +92,43 @@ const roles = [
 </section>
 
 <style>
-  .roles { list-style: none; }
+  .roles { list-style: none; position: relative; }
+  /* vertical timeline line */
+  .roles::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 0.6rem;
+    bottom: 0.6rem;
+    width: 2px;
+    background: var(--line);
+  }
+
   .role {
+    position: relative;
     display: grid;
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 200px 1fr;
     gap: clamp(1rem, 4vw, 3rem);
     padding-block: clamp(1.75rem, 4vw, 2.5rem);
+    padding-left: 2rem;
     border-top: 1px solid var(--line);
   }
   .role:first-child { border-top: 0; padding-top: 0; }
+
+  /* timeline marker */
+  .role::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: calc(clamp(1.75rem, 4vw, 2.5rem) + 0.35rem);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    box-sizing: border-box;
+  }
+  .role:first-child::before { top: 0.35rem; }
 
   .role__period {
     font-family: var(--font-mono);
@@ -112,15 +144,8 @@ const roles = [
   }
   .role__place { font-size: 0.85rem; color: var(--faint); margin-top: 0.1rem; }
 
-  .role__title {
-    font-size: clamp(1.2rem, 2vw, 1.6rem);
-    letter-spacing: -0.01em;
-  }
-  .role__summary {
-    color: var(--muted);
-    margin-top: 0.4rem;
-    font-size: 1.02rem;
-  }
+  .role__title { font-size: clamp(1.2rem, 2vw, 1.6rem); letter-spacing: -0.01em; }
+  .role__summary { color: var(--muted); margin-top: 0.4rem; font-size: 1.02rem; }
   .role__points {
     list-style: none;
     margin-top: 1.1rem;
@@ -130,7 +155,6 @@ const roles = [
   .role__points li {
     position: relative;
     padding-left: 1.3rem;
-    color: var(--ink);
     font-size: 0.98rem;
   }
   .role__points li::before {

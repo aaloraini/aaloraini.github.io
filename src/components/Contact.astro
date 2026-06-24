@@ -1,6 +1,7 @@
 ---
 const links = [
   { label: 'Email', value: 'hkem.moh.ar@gmail.com', href: 'mailto:hkem.moh.ar@gmail.com' },
+  { label: 'Phone', value: '+966 56 333 8070', href: 'tel:+966563338070' },
   { label: 'LinkedIn', value: '/in/abdulhakim-aloraini', href: 'https://www.linkedin.com/in/abdulhakim-aloraini/' },
   { label: 'GitHub', value: '@aaloraini', href: 'https://github.com/aaloraini' },
 ];
@@ -10,9 +11,9 @@ const year = new Date().getFullYear();
 
 <section class="section contact" id="contact">
   <div class="wrap">
-    <p class="eyebrow"><span class="num">05</span> Contact <span class="bar"></span></p>
+    <h2 class="eyebrow"><span class="num" aria-hidden="true">05</span> Contact <span class="bar" aria-hidden="true"></span></h2>
 
-    <h2 class="contact__headline">Let's build<br />something.</h2>
+    <p class="contact__headline">Let's build<br />something.</p>
     <p class="contact__sub">
       Open to product, operations, and engineering work. The fastest way to reach me is email.
     </p>
@@ -20,7 +21,7 @@ const year = new Date().getFullYear();
     <ul class="contact__links">
       {links.map((l) => (
         <li>
-          <a href={l.href} target={l.href.startsWith('mailto:') ? undefined : '_blank'} rel="noopener noreferrer">
+          <a href={l.href} target={l.href.startsWith('mailto:') || l.href.startsWith('tel:') ? undefined : '_blank'} rel="noopener noreferrer">
             <span class="contact__label">{l.label}</span>
             <span class="contact__value">{l.value} <span aria-hidden="true">↗</span></span>
           </a>

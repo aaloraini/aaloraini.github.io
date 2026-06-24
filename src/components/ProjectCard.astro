@@ -8,137 +8,146 @@ interface Props {
 
 const { project, index } = Astro.props;
 const n = String(index + 1).padStart(2, '0');
+const appStore = project.links?.find((l) => l.label === 'App Store');
+const otherLinks = project.links?.filter((l) => l.label !== 'App Store') ?? [];
+const applePath =
+  'M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z';
 ---
 
-<article class="card">
-  <div class="card__head">
-    <span class="card__num">{n}</span>
-    {project.status && <span class="card__status">{project.status}</span>}
+<article class="pcard">
+  <div class="pcard__aside">
+    {project.icon ? (
+      <img class="pcard__icon" src={project.icon.src} alt={project.icon.alt} width="104" height="104" loading="lazy" decoding="async" />
+    ) : (
+      <span class="pcard__num">{n}</span>
+    )}
+    {project.category && <span class="pcard__cat">{project.category}</span>}
+    {appStore && (
+      <a class="appstore" href={appStore.href} target="_blank" rel="noopener noreferrer" aria-label="View on the App Store">
+        <svg viewBox="0 0 384 512" width="15" height="20" aria-hidden="true"><path fill="currentColor" d={applePath} /></svg>
+        <span>App Store</span>
+      </a>
+    )}
   </div>
 
-  <div class="card__main">
-    <div class="card__text">
-      <h3 class="card__name">{project.name}</h3>
-      <p class="card__tagline">{project.tagline}</p>
-      <p class="card__desc">{project.description}</p>
+  <div class="pcard__main">
+    <h3 class="pcard__name">{project.name}</h3>
+    <p class="pcard__tagline">{project.tagline}</p>
+    {project.focus && <p class="pcard__focus">{project.focus}</p>}
+    {project.description && <p class="pcard__desc">{project.description}</p>}
 
-      <ul class="card__tags">
-        {project.tags.map((t) => <li class="tag">{t}</li>)}
-      </ul>
+    <ul class="pcard__tags">
+      {project.tags.map((t) => <li class="tag">{t}</li>)}
+    </ul>
 
-      {project.links && project.links.length > 0 && (
-        <div class="card__links">
-          {project.links.map((l) => (
-            <a class="card__link" href={l.href} target="_blank" rel="noopener noreferrer">
-              {l.label}
-              <span aria-hidden="true">↗</span>
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
-
-    {project.image && (
-      <div class="card__media">
-        <img src={project.image.src} alt={project.image.alt} loading="lazy" decoding="async" />
+    {otherLinks.length > 0 && (
+      <div class="pcard__links">
+        {otherLinks.map((l) => (
+          <a class="pcard__link" href={l.href} target="_blank" rel="noopener noreferrer">
+            {l.label}
+            <span aria-hidden="true">↗</span>
+          </a>
+        ))}
       </div>
     )}
   </div>
 </article>
 
 <style>
-  .card {
-    border-top: 1.5px solid var(--line-strong);
-    padding-top: 1.5rem;
-    padding-bottom: clamp(2rem, 5vw, 3rem);
+  .pcard {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(1.75rem, 4vw, 3rem);
+    box-shadow: 0 -14px 44px rgba(0, 0, 0, 0.06);
   }
-  .card__head {
+  @media (min-width: 760px) {
+    .pcard {
+      grid-template-columns: 220px 1fr;
+      gap: clamp(2rem, 4vw, 3.5rem);
+      align-items: start;
+    }
+  }
+
+  .pcard__aside {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 1rem;
-    margin-bottom: 1.25rem;
   }
-  .card__num {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--accent);
-    letter-spacing: 0.06em;
+  .pcard__icon {
+    width: clamp(76px, 12vw, 104px);
+    height: auto;
+    border-radius: 22.5%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
   }
-  .card__status {
+  .pcard__num { font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent); }
+  .pcard__cat {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--bg);
-    background: var(--ink);
-    padding: 0.28rem 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 0.25rem 0.65rem;
     border-radius: 100px;
   }
 
-  .card__main {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(1.5rem, 4vw, 3rem);
-    align-items: start;
-  }
-  .card:has(.card__media) .card__main {
-    grid-template-columns: 1.4fr 0.9fr;
-  }
-
-  .card__name {
-    font-size: clamp(1.75rem, 4vw, 2.75rem);
-    letter-spacing: -0.025em;
-  }
-  .card__tagline {
+  .pcard__name { font-size: clamp(1.6rem, 3.2vw, 2.4rem); letter-spacing: -0.025em; line-height: 1.1; }
+  .pcard__tagline {
+    color: var(--accent);
     font-family: var(--font-display);
     font-weight: 500;
-    color: var(--accent);
-    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
     margin-top: 0.4rem;
   }
-  .card__desc {
+  .pcard__focus {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
     color: var(--muted);
-    margin-top: 1rem;
-    max-width: 60ch;
-    font-size: 1.02rem;
+    margin-top: 0.85rem;
   }
-  .card__tags {
+  .pcard__desc { color: var(--muted); margin-top: 0.85rem; max-width: 60ch; }
+
+  .pcard__tags {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1.4rem;
+    gap: 0.45rem;
+    margin-top: 1.25rem;
   }
-  .card__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-    margin-top: 1.6rem;
-  }
-  .card__link {
+
+  .pcard__links { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 1.4rem; }
+  .appstore {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.4rem;
+    background: var(--badge-bg);
+    color: var(--badge-fg);
+    padding: 0.45rem 0.85rem;
+    border-radius: 10px;
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 0.98rem;
+    font-size: 0.88rem;
+    transition: filter 0.18s ease, transform 0.18s ease;
+  }
+  .appstore:hover { transform: translateY(-1px); filter: brightness(0.92); }
+  .appstore svg { width: 15px; height: auto; display: block; }
+  .pcard__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.92rem;
     border-bottom: 2px solid var(--ink);
-    padding-bottom: 2px;
+    padding-bottom: 1px;
     transition: color 0.18s ease, border-color 0.18s ease;
   }
-  .card__link:hover { color: var(--accent); border-color: var(--accent); }
-
-  .card__media {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--card);
-  }
-  .card__media img { width: 100%; height: auto; }
-
-  @media (max-width: 760px) {
-    .card:has(.card__media) .card__main { grid-template-columns: 1fr; }
-    .card__media { max-width: 280px; }
-  }
+  .pcard__link:hover { color: var(--accent); border-color: var(--accent); }
 </style>

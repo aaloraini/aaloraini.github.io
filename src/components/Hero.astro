@@ -1,22 +1,26 @@
 ---
 const stats = [
-  { k: '2', v: 'apps shipped on the App Store' },
-  { k: '3', v: 'national field rollouts delivered' },
-  { k: '6+', v: 'years across ops, electronics & code' },
+  { k: '3,000+', v: 'emergency vehicles equipped nationwide' },
+  { k: '1.8M+', v: 'people served during Hajj 1445' },
+  { k: '3', v: 'apps shipped on the App Store' },
 ];
 ---
 
 <header class="hero">
   <div class="wrap">
-    <p class="kicker">Riyadh · Kuala Lumpur — Project &amp; Operations · Engineering</p>
+    <p class="kicker">Product · Operations · Engineering · Open to the Gulf &amp; remote</p>
     <h1 class="name">Abdulhakim<br />Aloraini</h1>
 
     <div class="lede-row">
-      <p class="tagline">Engineer who <em>ships</em>.</p>
+      <p class="tagline"><em>I lead products,</em> and build them.</p>
       <p class="lede">
-        I take products from operations and rollout to design, build, and ship — running
-        large-scale field deployments, then turning that same end-to-end ownership into
-        apps and hardware of my own.
+        I run delivery end to end and build my own apps and hardware, so I understand the
+        technical detail deeply enough to make the right calls and communicate clearly with
+        both engineers and stakeholders.
+      </p>
+      <p class="hero__about">
+        Based in Riyadh, finishing a B.Eng. in Electrical &amp; Electronics Engineering, and
+        targeting technical product management roles across Saudi Arabia, the Gulf, and remote.
       </p>
     </div>
 
@@ -68,6 +72,11 @@ const stats = [
   .tagline em { color: var(--accent); font-style: normal; }
   .lede {
     font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+    max-width: 56ch;
+  }
+  .hero__about {
+    font-size: 0.98rem;
+    color: var(--muted);
     max-width: 56ch;
   }
   .cta {
