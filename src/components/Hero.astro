@@ -1,0 +1,106 @@
+---
+const stats = [
+  { k: '2', v: 'apps shipped on the App Store' },
+  { k: '3', v: 'national field rollouts delivered' },
+  { k: '6+', v: 'years across ops, electronics & code' },
+];
+---
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Riyadh · Kuala Lumpur — Project &amp; Operations · Engineering</p>
+    <h1 class="name">Abdulhakim<br />Aloraini</h1>
+
+    <div class="lede-row">
+      <p class="tagline">Engineer who <em>ships</em>.</p>
+      <p class="lede">
+        I take products from operations and rollout to design, build, and ship — running
+        large-scale field deployments, then turning that same end-to-end ownership into
+        apps and hardware of my own.
+      </p>
+    </div>
+
+    <div class="cta">
+      <a class="btn btn--solid" href="#work">View work</a>
+      <a class="btn btn--ghost" href="#contact">Get in touch</a>
+    </div>
+
+    <dl class="stats">
+      {stats.map((s) => (
+        <div class="stat">
+          <dt>{s.k}</dt>
+          <dd>{s.v}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</header>
+
+<style>
+  .hero {
+    padding-block: clamp(3rem, 9vw, 7rem) clamp(2.5rem, 6vw, 4rem);
+  }
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  .name {
+    font-size: clamp(3.25rem, 13vw, 10.5rem);
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+  }
+  .lede-row {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: clamp(1.75rem, 4vw, 2.75rem);
+    max-width: 64ch;
+  }
+  .tagline {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    letter-spacing: -0.02em;
+  }
+  .tagline em { color: var(--accent); font-style: normal; }
+  .lede {
+    font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+    max-width: 56ch;
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 2rem;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: clamp(3rem, 7vw, 5rem);
+    border-top: 1.5px solid var(--line-strong);
+    padding-top: 1.75rem;
+  }
+  .stat dt {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    letter-spacing: -0.03em;
+    color: var(--accent);
+  }
+  .stat dd {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 0.35rem;
+    max-width: 24ch;
+  }
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: 1fr; gap: 1.1rem; }
+    .stat { display: flex; align-items: baseline; gap: 1rem; }
+    .stat dt { font-size: 2rem; }
+    .stat dd { margin-top: 0; }
+  }
+</style>

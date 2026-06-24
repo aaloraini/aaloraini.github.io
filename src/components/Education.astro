@@ -1,0 +1,107 @@
+---
+const education = [
+  {
+    school: 'UCSI University',
+    place: 'Kuala Lumpur',
+    detail: 'B.Eng., Electrical & Electronics Engineering',
+    period: 'Ongoing',
+  },
+  {
+    school: 'Saudi Petroleum Services Polytechnic (SPSP)',
+    place: 'Dammam',
+    detail: 'Diploma, Instruments & Control Technology',
+    period: '2019',
+  },
+];
+
+const certs = [
+  'Certified Operations Manager (COM) — The Knowledge Academy',
+  'Contractor Workforce Qualification Assurance Program — Aramco',
+  'Benchwork Course (Electronics) — SPSP',
+  'Schlumberger Injury Prevention Program — Schlumberger ME',
+];
+---
+
+<section class="section" id="education">
+  <div class="wrap">
+    <p class="eyebrow"><span class="num">04</span> Education &amp; Certifications <span class="bar"></span></p>
+
+    <div class="cols">
+      <div class="col">
+        <h3 class="col__label">Education</h3>
+        <ul class="edu">
+          {education.map((e) => (
+            <li class="edu__item">
+              <div class="edu__row">
+                <span class="edu__school">{e.school}</span>
+                <span class="edu__period">{e.period}</span>
+              </div>
+              <p class="edu__detail">{e.detail}</p>
+              <p class="edu__place">{e.place}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="col">
+        <h3 class="col__label">Certifications</h3>
+        <ul class="certs">
+          {certs.map((c) => <li>{c}</li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 6vw, 5rem);
+  }
+  .col__label {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.4rem;
+  }
+  .edu { list-style: none; display: flex; flex-direction: column; gap: 1.6rem; }
+  .edu__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .edu__school { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; }
+  .edu__period {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .edu__detail { margin-top: 0.35rem; color: var(--ink); }
+  .edu__place { color: var(--faint); font-size: 0.9rem; }
+
+  .certs { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+  .certs li {
+    position: relative;
+    padding-left: 1.3rem;
+    color: var(--muted);
+  }
+  .certs li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 0.5rem;
+    height: 1.5px;
+    background: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .cols { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+</style>

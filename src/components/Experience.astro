@@ -1,0 +1,149 @@
+---
+const roles = [
+  {
+    org: 'Sahab',
+    place: 'Riyadh, KSA',
+    title: 'Project Operations Manager',
+    period: '2023 — 2025',
+    summary: 'Owned three national field deployments end to end.',
+    points: [
+      'Led operations for MOH-Hajj 1445, SRCA AVL, and MC AVL — scope, schedule, resources, and risk.',
+      'Aligned KPIs daily with MOH and SRCA counterparts and kept phased rollouts on track across regions.',
+      'Coordinated field, back-office, and vendor teams; unblocked issues fast and closed actions with owners.',
+      'Shipped concise daily and weekly dashboards on incidents, performance, and SLAs.',
+    ],
+  },
+  {
+    org: 'Sahab',
+    place: 'Riyadh, KSA',
+    title: 'Hardware Technician — MOH-Hajj 1444',
+    period: '2023',
+    summary: 'On-the-ground device deployment for the Hajj ambulance fleet.',
+    points: [
+      'Configured devices from the BRD and installed AVL units on ambulances.',
+      'Onboarded vehicles to the AVL portal and verified live data flow.',
+      'Supported CAD dispatch and ePCR setup; trained dispatchers and medical staff on site.',
+    ],
+  },
+  {
+    org: 'Palmlab',
+    place: 'Riyadh, KSA',
+    title: 'Electronics Lab Supervisor & Scrum Master',
+    period: '2021 — 2023',
+    summary: 'Ran the PCB manufacturing team and its delivery cadence.',
+    points: [
+      'Led the PCB team: set priorities, removed blockers, kept throughput and quality in view.',
+      'Ran sprint planning and stand-ups as Scrum Master.',
+      'Owned lab inventory and equipment; sourced components and instruments.',
+    ],
+  },
+  {
+    org: 'MachinesTalk',
+    place: 'Riyadh, KSA',
+    title: 'Motorna Support / L2 Technical Support',
+    period: '2020 — 2021',
+    summary: 'Second-line support for IoT / M2M devices.',
+    points: [
+      'Handled escalations, separating software from hardware causes quickly.',
+      'Read device logs, applied fixes, and documented outcomes for the dev team.',
+      'Diagnosed and repaired hardware to reduce customer downtime.',
+    ],
+  },
+  {
+    org: 'Schlumberger',
+    place: 'Dhahran, KSA',
+    title: 'Electronics Lab Technician',
+    period: '2019 — 2020',
+    summary: 'Repaired and calibrated electronics and sensors for drilling equipment.',
+    points: [],
+  },
+];
+---
+
+<section class="section" id="experience">
+  <div class="wrap">
+    <p class="eyebrow"><span class="num">01</span> Experience <span class="bar"></span></p>
+
+    <ol class="roles">
+      {roles.map((r) => (
+        <li class="role">
+          <div class="role__meta">
+            <p class="role__period">{r.period}</p>
+            <p class="role__org">{r.org}</p>
+            <p class="role__place">{r.place}</p>
+          </div>
+          <div class="role__body">
+            <h3 class="role__title">{r.title}</h3>
+            <p class="role__summary">{r.summary}</p>
+            {r.points.length > 0 && (
+              <ul class="role__points">
+                {r.points.map((p) => <li>{p}</li>)}
+              </ul>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .roles { list-style: none; }
+  .role {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: clamp(1rem, 4vw, 3rem);
+    padding-block: clamp(1.75rem, 4vw, 2.5rem);
+    border-top: 1px solid var(--line);
+  }
+  .role:first-child { border-top: 0; padding-top: 0; }
+
+  .role__period {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .role__org {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    margin-top: 0.4rem;
+  }
+  .role__place { font-size: 0.85rem; color: var(--faint); margin-top: 0.1rem; }
+
+  .role__title {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    letter-spacing: -0.01em;
+  }
+  .role__summary {
+    color: var(--muted);
+    margin-top: 0.4rem;
+    font-size: 1.02rem;
+  }
+  .role__points {
+    list-style: none;
+    margin-top: 1.1rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .role__points li {
+    position: relative;
+    padding-left: 1.3rem;
+    color: var(--ink);
+    font-size: 0.98rem;
+  }
+  .role__points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 0.5rem;
+    height: 1.5px;
+    background: var(--accent);
+  }
+
+  @media (max-width: 720px) {
+    .role { grid-template-columns: 1fr; gap: 0.85rem; }
+  }
+</style>

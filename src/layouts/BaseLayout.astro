@@ -1,0 +1,41 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/space-grotesk';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Abdulhakim Aloraini — Project & Operations Engineer',
+  description = 'Abdulhakim Aloraini — project & operations manager and electronics engineer who ships products end to end: large-scale field rollouts, shipped App Store apps, and hardware.',
+} = Astro.props;
+
+const canonical = Astro.site?.href ?? 'https://aaloraini.github.io/';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Abdulhakim Aloraini" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Abdulhakim Aloraini" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#faf8f3" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>

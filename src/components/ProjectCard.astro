@@ -1,0 +1,144 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+const n = String(index + 1).padStart(2, '0');
+---
+
+<article class="card">
+  <div class="card__head">
+    <span class="card__num">{n}</span>
+    {project.status && <span class="card__status">{project.status}</span>}
+  </div>
+
+  <div class="card__main">
+    <div class="card__text">
+      <h3 class="card__name">{project.name}</h3>
+      <p class="card__tagline">{project.tagline}</p>
+      <p class="card__desc">{project.description}</p>
+
+      <ul class="card__tags">
+        {project.tags.map((t) => <li class="tag">{t}</li>)}
+      </ul>
+
+      {project.links && project.links.length > 0 && (
+        <div class="card__links">
+          {project.links.map((l) => (
+            <a class="card__link" href={l.href} target="_blank" rel="noopener noreferrer">
+              {l.label}
+              <span aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+
+    {project.image && (
+      <div class="card__media">
+        <img src={project.image.src} alt={project.image.alt} loading="lazy" decoding="async" />
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .card {
+    border-top: 1.5px solid var(--line-strong);
+    padding-top: 1.5rem;
+    padding-bottom: clamp(2rem, 5vw, 3rem);
+  }
+  .card__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .card__num {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+  .card__status {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--bg);
+    background: var(--ink);
+    padding: 0.28rem 0.65rem;
+    border-radius: 100px;
+  }
+
+  .card__main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+  }
+  .card:has(.card__media) .card__main {
+    grid-template-columns: 1.4fr 0.9fr;
+  }
+
+  .card__name {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    letter-spacing: -0.025em;
+  }
+  .card__tagline {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--accent);
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    margin-top: 0.4rem;
+  }
+  .card__desc {
+    color: var(--muted);
+    margin-top: 1rem;
+    max-width: 60ch;
+    font-size: 1.02rem;
+  }
+  .card__tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.4rem;
+  }
+  .card__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 1.6rem;
+  }
+  .card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.98rem;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 2px;
+    transition: color 0.18s ease, border-color 0.18s ease;
+  }
+  .card__link:hover { color: var(--accent); border-color: var(--accent); }
+
+  .card__media {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--card);
+  }
+  .card__media img { width: 100%; height: auto; }
+
+  @media (max-width: 760px) {
+    .card:has(.card__media) .card__main { grid-template-columns: 1fr; }
+    .card__media { max-width: 280px; }
+  }
+</style>
