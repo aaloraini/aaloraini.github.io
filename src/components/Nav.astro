@@ -1,14 +1,14 @@
 ---
 const links = [
-  { label: 'Experience', href: '#experience' },
-  { label: 'Work', href: '#work' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Work', href: '/#work' },
+  { label: 'Contact', href: '/#contact' },
 ];
 ---
 
 <header class="nav">
   <div class="nav__inner wrap">
-    <a class="nav__brand" href="#main">Abdulhakim Aloraini</a>
+    <a class="nav__brand" href="/">Abdulhakim Aloraini</a>
     <div class="nav__right">
       <nav class="nav__links" aria-label="Primary">
         {links.map((l) => <a href={l.href}>{l.label}</a>)}

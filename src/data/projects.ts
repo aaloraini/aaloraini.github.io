@@ -10,9 +10,10 @@ export type Project = {
   tags: string[];
   links?: Link[];
   icon?: { src: string; alt: string };
+  caseStudy?: string; // slug of the case-study page under /work/
 };
 
-/* Featured: side-rolling cards. Apps first, then hardware. */
+/* Featured: full-width cards, one per case study. */
 export const featured: Project[] = [
   {
     name: 'Logic Circuits Simulator',
@@ -24,6 +25,7 @@ export const featured: Project[] = [
     tags: ['Swift', 'SwiftUI', 'iOS · iPadOS · macOS'],
     links: [{ label: 'App Store', href: 'https://apps.apple.com/app/id6748374538' }],
     icon: { src: '/images/lcs/icon.png', alt: 'Logic Circuits Simulator app icon' },
+    caseStudy: 'logic-circuits-simulator',
   },
   {
     name: 'Ayatuk: Quran Verse Reminder',
@@ -35,45 +37,42 @@ export const featured: Project[] = [
     tags: ['Swift', 'SwiftUI', 'iOS'],
     links: [{ label: 'App Store', href: 'https://apps.apple.com/app/id6758534632' }],
     icon: { src: '/images/ayah/icon.png', alt: 'Ayatuk app icon' },
-  },
-  {
-    name: 'JuDo',
-    tagline: 'Minimal to-do with widgets and iCloud sync',
-    focus: 'Focus: product and cross-platform engineering',
-    description:
-      "JuDo began as a tool for myself: I wanted one minimal to-do widget I could reach from anywhere, my Mac, iPhone, and iPad, with everything kept in sync. I built the macOS version first and refined it by living in it, taking notes on what actually helped my productivity. Once it felt right, I built the iOS and iPadOS apps and tied them together with iCloud so tasks stay current on every device. It is a small app that solves a real daily need, and I kept it simple, free, and open source on GitHub.",
-    category: 'App',
-    tags: ['Swift', 'WidgetKit', 'CloudKit'],
-    links: [
-      { label: 'App Store', href: 'https://apps.apple.com/app/id6758580110' },
-      { label: 'GitHub', href: 'https://github.com/aaloraini/JuDo' },
-    ],
-    icon: { src: '/images/judo/icon.png', alt: 'JuDo app icon' },
-  },
-  {
-    name: 'ClearTick',
-    tagline: 'A transparent-cased digital wristwatch',
-    focus: 'Focus: hardware and embedded firmware',
-    description:
-      "I wanted a hands-on firmware project, so I designed a simple digital wristwatch around an MSP430FR4133 and sourced every component myself. The idea was a transparent-cased watch where the electronics are part of the look. The PCB I designed works as expected and the firmware is up and running; the enclosure is the part I am still finishing.",
-    category: 'Hardware',
-    tags: ['Embedded', 'MSP430', 'PCB / KiCad'],
-    links: [{ label: 'GitHub', href: 'https://github.com/aaloraini/ClearTick' }],
+    caseStudy: 'ayatuk',
   },
   {
     name: 'Portable Vending Machine',
     tagline: 'From technical drawings to a working prototype',
     focus: 'Focus: team leadership and engineering design',
     description:
-      "This was my first-year project for the Drawing & Designing class, where I led a team of six. We set out to deliver the strongest design and a working proof of concept with the resources we had. My real aim was to show my teammates how to turn CAD models and paper sketches into a fully functional prototype, and how genuinely fun engineering is in real life. We had a great time building it and the result stood out: full marks in the class, and the prototype is still on display in the university's robotics and mechatronics lab.",
+      "This was my first-year project for the Drawing & Designing class, where I led a team of six. We set out to deliver the strongest design and a working proof of concept with the resources we had. My real aim was to show my teammates how to turn CAD models and paper sketches into a fully functional prototype, and how genuinely fun engineering is in real life. We had a great time building it and the result stood out: we won the class demo competition, every member earned an A+, and the prototype is still on display in the university's robotics and mechatronics lab.",
     category: 'Hardware',
     tags: ['Engineering design', 'C++', 'Mechatronics'],
     links: [{ label: 'GitHub', href: 'https://github.com/aaloraini/portable-vending-machine' }],
+    caseStudy: 'portable-vending-machine',
   },
 ];
 
 /* Brief mentions: compact rows. */
 export const more: Project[] = [
+  {
+    name: 'JuDo',
+    tagline: 'Minimal to-do with widgets and iCloud sync, live on the App Store',
+    status: 'Live',
+    description: '',
+    tags: ['Swift', 'WidgetKit', 'CloudKit'],
+    links: [
+      { label: 'App Store', href: 'https://apps.apple.com/app/id6758580110' },
+      { label: 'GitHub', href: 'https://github.com/aaloraini/JuDo' },
+    ],
+  },
+  {
+    name: 'ClearTick',
+    tagline: 'A transparent-cased digital wristwatch: MSP430 firmware and a custom PCB',
+    status: 'In progress',
+    description: '',
+    tags: ['Embedded', 'MSP430', 'PCB / KiCad'],
+    links: [{ label: 'GitHub', href: 'https://github.com/aaloraini/ClearTick' }],
+  },
   {
     name: 'PixiCanva',
     tagline: 'Cross-platform pixel-art editor with layers, animation, and export',

@@ -1,0 +1,312 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { caseStudies } from '../../data/caseStudies';
+
+export function getStaticPaths() {
+  return caseStudies.map((cs) => ({ params: { slug: cs.slug }, props: { cs } }));
+}
+
+const { cs } = Astro.props;
+
+const appStore = cs.links?.find((l) => l.label === 'App Store');
+const otherLinks = cs.links?.filter((l) => l.label !== 'App Store') ?? [];
+const applePath =
+  'M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z';
+
+const meta = cs.meta;
+
+const title = `${cs.name}, a case study by Abdulhakim Aloraini`;
+const description = cs.summary;
+---
+
+<BaseLayout title={title} description={description}>
+  <main id="main" class="cs">
+    <article class="wrap cs__inner">
+      <a class="cs__back" href="/#work">
+        <span aria-hidden="true">&larr;</span> All work
+      </a>
+
+      <header class="cs__head">
+        <p class="cs__eyebrow">{cs.category} <span aria-hidden="true">&middot;</span> Case study</p>
+        <div class="cs__title">
+          {cs.icon && (
+            <img class="cs__icon" src={cs.icon.src} alt={cs.icon.alt} width="96" height="96" decoding="async" />
+          )}
+          <div>
+            <h1 class="cs__name">{cs.name}</h1>
+            <p class="cs__tagline">{cs.tagline}</p>
+          </div>
+        </div>
+
+        <p class="cs__summary">{cs.summary}</p>
+
+        <dl class="cs__meta">
+          {meta.map((m) => (
+            <div class="cs__meta-row">
+              <dt>{m.k}</dt>
+              <dd>{m.v}</dd>
+            </div>
+          ))}
+        </dl>
+
+        {(appStore || otherLinks.length > 0) && (
+          <div class="cs__links">
+            {appStore && (
+              <a class="appstore" href={appStore.href} target="_blank" rel="noopener noreferrer" aria-label="View on the App Store">
+                <svg viewBox="0 0 384 512" width="15" height="20" aria-hidden="true"><path fill="currentColor" d={applePath} /></svg>
+                <span>App Store</span>
+              </a>
+            )}
+            {otherLinks.map((l) => (
+              <a class="cs__link" href={l.href} target="_blank" rel="noopener noreferrer">
+                {l.label} <span aria-hidden="true">&nearr;</span>
+              </a>
+            ))}
+          </div>
+        )}
+      </header>
+
+      {cs.metrics && cs.metrics.length > 0 && (
+        <ul class="cs__metrics">
+          {cs.metrics.map((m) => (
+            <li>
+              <span class="cs__metric-val">{m.value}</span>
+              <span class="cs__metric-label">{m.label}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {cs.artifact && (
+        <figure class="cs__artifact">
+          {cs.artifact.href ? (
+            <a href={cs.artifact.href} target="_blank" rel="noopener noreferrer">
+              <img src={cs.artifact.src} alt={cs.artifact.alt} loading="lazy" decoding="async" />
+            </a>
+          ) : (
+            <img src={cs.artifact.src} alt={cs.artifact.alt} loading="lazy" decoding="async" />
+          )}
+          <figcaption>
+            <span class="cs__artifact-cap">{cs.artifact.caption}</span>
+            {cs.artifact.href && (
+              <a class="cs__link cs__artifact-link" href={cs.artifact.href} target="_blank" rel="noopener noreferrer">
+                {cs.artifact.hrefLabel ?? 'View'} <span aria-hidden="true">&nearr;</span>
+              </a>
+            )}
+          </figcaption>
+        </figure>
+      )}
+
+      <h2 class="cs__spine-label"><span class="num" aria-hidden="true">/</span> Product lifecycle <span class="bar" aria-hidden="true"></span></h2>
+
+      <ol class="spine">
+        {cs.phases.map((p, i) => (
+          <li class="phase">
+            <div class="phase__marker" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
+            <div class="phase__body">
+              <h3 class="phase__label">{p.label}</h3>
+              {p.body.map((para) => <p class="phase__text">{para}</p>)}
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <footer class="cs__foot">
+        {(appStore || otherLinks.length > 0) && (
+          <div class="cs__links">
+            {appStore && (
+              <a class="appstore" href={appStore.href} target="_blank" rel="noopener noreferrer" aria-label="View on the App Store">
+                <svg viewBox="0 0 384 512" width="15" height="20" aria-hidden="true"><path fill="currentColor" d={applePath} /></svg>
+                <span>App Store</span>
+              </a>
+            )}
+            {otherLinks.map((l) => (
+              <a class="cs__link" href={l.href} target="_blank" rel="noopener noreferrer">
+                {l.label} <span aria-hidden="true">&nearr;</span>
+              </a>
+            ))}
+          </div>
+        )}
+        <a class="cs__back cs__back--foot" href="/#work">
+          <span aria-hidden="true">&larr;</span> Back to all work
+        </a>
+      </footer>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .cs__inner { max-width: 860px; padding-top: clamp(2rem, 6vw, 4rem); padding-bottom: clamp(3.5rem, 9vw, 7rem); }
+
+  .cs__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.18s ease, gap 0.18s ease;
+  }
+  .cs__back:hover { color: var(--accent); gap: 0.7rem; }
+
+  .cs__head { margin-top: clamp(1.75rem, 4vw, 2.75rem); }
+  .cs__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .cs__title { display: flex; align-items: center; gap: 1.25rem; margin-top: 1rem; }
+  .cs__icon { width: clamp(64px, 12vw, 88px); height: auto; border-radius: 22.5%; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14); flex: none; }
+  .cs__name { font-size: clamp(2rem, 6vw, 3.4rem); letter-spacing: -0.03em; line-height: 1.02; }
+  .cs__tagline { color: var(--accent); font-family: var(--font-display); font-weight: 500; font-size: clamp(1.05rem, 2vw, 1.3rem); margin-top: 0.4rem; }
+
+  .cs__summary {
+    font-size: clamp(1.15rem, 1rem + 0.7vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--ink);
+    margin-top: clamp(1.5rem, 4vw, 2.25rem);
+    max-width: 62ch;
+  }
+
+  .cs__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2.5rem;
+    margin-top: clamp(1.75rem, 4vw, 2.5rem);
+    padding-top: clamp(1.5rem, 3vw, 2rem);
+    border-top: 1px solid var(--line);
+  }
+  .cs__meta-row dt {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .cs__meta-row dd { font-family: var(--font-display); font-weight: 600; font-size: 1rem; margin-top: 0.3rem; }
+
+  .cs__links { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; margin-top: clamp(1.5rem, 4vw, 2.25rem); }
+  .appstore {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: var(--badge-bg); color: var(--badge-fg);
+    padding: 0.45rem 0.85rem; border-radius: 10px;
+    font-family: var(--font-display); font-weight: 600; font-size: 0.88rem;
+    transition: filter 0.18s ease, transform 0.18s ease;
+  }
+  .appstore:hover { transform: translateY(-1px); filter: brightness(0.92); }
+  .appstore svg { width: 15px; height: auto; display: block; }
+  .cs__link {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-family: var(--font-display); font-weight: 600; font-size: 0.92rem;
+    border-bottom: 2px solid var(--ink); padding-bottom: 1px;
+    transition: color 0.18s ease, border-color 0.18s ease;
+  }
+  .cs__link:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* Headline metrics */
+  .cs__metrics {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: clamp(2.5rem, 6vw, 3.5rem);
+  }
+  .cs__metrics li { background: var(--card); padding: clamp(1.25rem, 3vw, 1.75rem); display: flex; flex-direction: column; gap: 0.5rem; }
+  .cs__metric-val { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 3.5vw, 2.1rem); letter-spacing: -0.02em; line-height: 1; }
+  .cs__metric-label { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+  @media (max-width: 640px) {
+    .cs__metrics { grid-template-columns: 1fr; }
+  }
+
+  /* Artifact figure (e.g. the project board) */
+  .cs__artifact { margin-top: clamp(2.5rem, 6vw, 3.5rem); }
+  .cs__artifact a { display: block; }
+  .cs__artifact img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--card);
+    transition: border-color 0.18s ease;
+  }
+  .cs__artifact a:hover img { border-color: var(--line-strong); }
+  .cs__artifact figcaption { margin-top: 1rem; }
+  .cs__artifact-cap { display: block; font-size: 0.92rem; color: var(--muted); max-width: 64ch; }
+  .cs__artifact-link { margin-top: 0.7rem; font-size: 0.9rem; }
+
+  /* Lifecycle spine label */
+  .cs__spine-label {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: clamp(3rem, 8vw, 5rem);
+    margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+  }
+  .cs__spine-label .num { color: var(--accent); font-weight: 600; }
+  .cs__spine-label .bar { flex: 1; height: 1px; background: var(--line); }
+
+  /* Lifecycle spine: numbered phases on a single vertical line */
+  .spine { list-style: none; position: relative; }
+  .spine::before {
+    content: '';
+    position: absolute;
+    left: 1.15rem;
+    top: 0.6rem;
+    bottom: 0.6rem;
+    width: 1.5px;
+    background: var(--line);
+  }
+  .phase { position: relative; padding-left: 3.75rem; padding-bottom: clamp(2rem, 5vw, 3rem); }
+  .phase:last-child { padding-bottom: 0; }
+  .phase__marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2.3rem;
+    height: 2.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1.5px solid var(--line-strong);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .phase__label { font-size: clamp(1.2rem, 2.6vw, 1.6rem); letter-spacing: -0.02em; margin-bottom: 0.7rem; }
+  .phase__text { color: var(--muted); max-width: 64ch; }
+  .phase__text + .phase__text { margin-top: 0.85rem; }
+
+  .cs__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: clamp(3rem, 8vw, 5rem);
+    padding-top: clamp(2rem, 4vw, 2.5rem);
+    border-top: 1.5px solid var(--line-strong);
+  }
+  .cs__foot .cs__links { margin-top: 0; }
+  .cs__back--foot { font-size: 0.82rem; }
+
+  @media (max-width: 560px) {
+    .cs__title { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+</style>
