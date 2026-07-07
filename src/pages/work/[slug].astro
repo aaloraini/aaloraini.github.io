@@ -17,9 +17,20 @@ const meta = cs.meta;
 
 const title = `${cs.name}, a case study by Abdulhakim Aloraini`;
 const description = cs.summary;
+
+const site = Astro.site?.href ?? 'https://aaloraini.github.io/';
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: cs.name,
+  description: cs.summary,
+  url: new URL(`/work/${cs.slug}/`, site).href,
+  image: new URL('og.png', site).href,
+  author: { '@type': 'Person', name: 'Abdulhakim Aloraini', url: 'https://aaloraini.github.io/' },
+};
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} ogType="article" schema={schema}>
   <main id="main" class="cs">
     <article class="wrap cs__inner">
       <a class="cs__back" href="/#work">

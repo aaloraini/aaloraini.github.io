@@ -7,9 +7,24 @@ import Projects from '../components/Projects.astro';
 import Skills from '../components/Skills.astro';
 import Education from '../components/Education.astro';
 import Contact from '../components/Contact.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Abdulhakim Aloraini',
+  url: 'https://aaloraini.github.io/',
+  jobTitle: 'Product & Operations Leader',
+  email: 'mailto:hkem.moh.ar@gmail.com',
+  telephone: '+966563338070',
+  address: { '@type': 'PostalAddress', addressLocality: 'Riyadh', addressCountry: 'SA' },
+  sameAs: [
+    'https://www.linkedin.com/in/abdulhakim-aloraini/',
+    'https://github.com/aaloraini',
+  ],
+};
 ---
 
-<BaseLayout>
+<BaseLayout schema={schema}>
   <main id="main">
     <Hero />
     <Projects />

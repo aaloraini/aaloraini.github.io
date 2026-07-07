@@ -36,7 +36,9 @@ const links = [
     sync();
     btn.addEventListener('click', () => {
       const next = effective() === 'dark' ? 'light' : 'dark';
-      root.dataset.theme = next;
+      // __applyTheme (BaseLayout head) also syncs the theme-color metas
+      if (window.__applyTheme) window.__applyTheme(next);
+      else root.dataset.theme = next;
       try {
         localStorage.setItem('theme', next);
       } catch (e) {}
