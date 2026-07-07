@@ -41,7 +41,7 @@ const schema = {
         <p class="cs__eyebrow">{cs.category} <span aria-hidden="true">&middot;</span> Case study</p>
         <div class="cs__title">
           {cs.icon && (
-            <img class="cs__icon" src={cs.icon.src} alt={cs.icon.alt} width="96" height="96" decoding="async" />
+            <img class="cs__icon" src={cs.icon.src} alt={cs.icon.alt} width="96" height="96" decoding="async" transition:name={`icon-${cs.slug}`} />
           )}
           <div>
             <h1 class="cs__name">{cs.name}</h1>

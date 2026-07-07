@@ -27,8 +27,11 @@ const links = [
 </header>
 
 <script>
-  const btn = document.querySelector('[data-theme-toggle]');
-  if (btn) {
+  // Runs on the initial load and after every ClientRouter navigation;
+  // the swapped-in button is a fresh element and needs rebinding.
+  function setupThemeToggle() {
+    const btn = document.querySelector('[data-theme-toggle]');
+    if (!btn) return;
     const root = document.documentElement;
     const systemDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
     const effective = () => root.dataset.theme || (systemDark() ? 'dark' : 'light');
@@ -45,6 +48,7 @@ const links = [
       sync();
     });
   }
+  document.addEventListener('astro:page-load', setupThemeToggle);
 </script>
 
 <style>

@@ -2,6 +2,7 @@
 import '@fontsource-variable/inter';
 import '@fontsource-variable/space-grotesk';
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import Nav from '../components/Nav.astro';
 
 interface Props {
@@ -66,7 +67,33 @@ const ogImage = new URL('og.png', site).href;
         document.addEventListener('astro:after-swap', restore);
       })();
     </script>
+    <script is:inline>
+      /* GoatCounter, SPA-aware: auto-count is off and every astro:page-load
+         (initial load included) sends exactly one pageview. Does not count
+         on localhost. */
+      window.goatcounter = { no_onload: true };
+      (function () {
+        var queued = false;
+        function send() {
+          if (window.goatcounter.count) window.goatcounter.count({ path: location.pathname });
+          else queued = true;
+        }
+        document.addEventListener('astro:page-load', send);
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://gc.zgo.at/count.js';
+        s.dataset.goatcounter = 'https://aaloraini.goatcounter.com/count';
+        s.onload = function () {
+          if (queued) {
+            queued = false;
+            send();
+          }
+        };
+        document.head.appendChild(s);
+      })();
+    </script>
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+    <ClientRouter />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

@@ -16,7 +16,9 @@ const applePath =
 
 <article class:list={['pcard', { 'pcard--linked': project.caseStudy }]}>
   <div class="pcard__aside">
-    {project.icon ? (
+    {project.icon && project.caseStudy ? (
+      <img class="pcard__icon" src={project.icon.src} alt={project.icon.alt} width="104" height="104" loading="lazy" decoding="async" transition:name={`icon-${project.caseStudy}`} />
+    ) : project.icon ? (
       <img class="pcard__icon" src={project.icon.src} alt={project.icon.alt} width="104" height="104" loading="lazy" decoding="async" />
     ) : (
       <span class="pcard__num">{n}</span>
