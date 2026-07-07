@@ -6,4 +6,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://aaloraini.github.io',
   integrations: [sitemap()],
+  // Astro 7 defaults to JSX-style whitespace stripping, which can drop
+  // meaningful spaces between inline elements; keep the HTML-aware mode.
+  compressHTML: true,
 });
