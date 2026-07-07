@@ -9,7 +9,7 @@ import ProjectCard from './ProjectCard.astro';
 
     <div class="stack">
       {featured.map((project, i) => (
-        <div class="stack__item" style={`--i:${i}`}>
+        <div class="stack__item" style={`--i:${i}`} data-reveal>
           <ProjectCard project={project} index={i} />
         </div>
       ))}
@@ -18,7 +18,7 @@ import ProjectCard from './ProjectCard.astro';
     <h3 class="more__heading">Also built</h3>
     <ul class="more">
       {more.map((p) => (
-        <li class="more__item">
+        <li class="more__item" data-reveal>
           <div class="more__top">
             <h4 class="more__name">{p.name}</h4>
             {p.status && <span class="more__status">{p.status}</span>}
@@ -86,7 +86,9 @@ import ProjectCard from './ProjectCard.astro';
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+    transition: background-color 0.2s ease;
   }
+  .more__item:hover { background: var(--card); }
   .more__top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; }
   .more__name { font-size: 1.3rem; letter-spacing: -0.01em; }
   .more__status {

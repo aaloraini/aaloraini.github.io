@@ -8,8 +8,11 @@ const stats = [
 
 <header class="hero">
   <div class="wrap">
-    <p class="kicker">Product · Operations · Engineering · Open to the Gulf &amp; remote</p>
-    <h1 class="name">Abdulhakim<br />Aloraini</h1>
+    <p class="kicker"><span class="kicker__dot" aria-hidden="true"></span>Product · Operations · Engineering · Open to the Gulf &amp; remote</p>
+    <h1 class="name">
+      <span class="name__line"><span class="name__word">Abdulhakim</span></span>
+      <span class="name__line"><span class="name__word name__word--stroke">Aloraini</span></span>
+    </h1>
 
     <div class="lede-row">
       <p class="tagline"><em>I lead products,</em> and build them.</p>
@@ -52,10 +55,59 @@ const stats = [
     color: var(--muted);
     margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
   }
+  .kicker__dot {
+    display: inline-block;
+    width: 0.55em;
+    height: 0.55em;
+    background: var(--accent);
+    margin-right: 0.9em;
+  }
   .name {
     font-size: clamp(3.25rem, 13vw, 10.5rem);
     letter-spacing: -0.035em;
     text-transform: uppercase;
+  }
+  .name__line {
+    display: block;
+    overflow: hidden;
+  }
+  .name__word { display: inline-block; }
+  /* Editorial filled/outline pairing on the surname */
+  .name__word--stroke {
+    color: transparent;
+    -webkit-text-stroke: clamp(1.5px, 0.022em, 3px) var(--ink);
+  }
+  @supports not (-webkit-text-stroke: 1px black) {
+    .name__word--stroke { color: var(--ink); }
+  }
+
+  /* Entrance cascade: kicker, name lines rise out of their masks, then
+     the lede, CTAs, and stats follow. Static under reduced motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    .kicker {
+      opacity: 0;
+      animation: hero-fade 0.6s ease 0s forwards;
+    }
+    .name__word {
+      transform: translateY(115%);
+      animation: hero-rise 0.75s cubic-bezier(0.22, 0.7, 0.2, 1) 0.08s forwards;
+    }
+    .name__line:nth-child(2) .name__word { animation-delay: 0.18s; }
+    .lede-row,
+    .cta,
+    .stats {
+      opacity: 0;
+      transform: translateY(0.6rem);
+      animation: hero-fade 0.65s ease 0.45s forwards;
+    }
+    .cta { animation-delay: 0.55s; }
+    .stats { animation-delay: 0.65s; }
+  }
+  @keyframes hero-rise {
+    to { transform: translateY(0); }
+  }
+  @keyframes hero-fade {
+    to { opacity: 1; transform: none; }
   }
   .lede-row {
     display: grid;
@@ -113,3 +165,42 @@ const stats = [
     .stat dd { margin-top: 0; }
   }
 </style>
+
+<script>
+  // Count the hero stats up from zero the first time they scroll into
+  // view. The real values are server-rendered, so no-JS, reduced-motion,
+  // and crawlers all see the finished numbers.
+  function initCountUp() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!('IntersectionObserver' in window)) return;
+    document.querySelectorAll('.stats dt').forEach((el) => {
+      const match = (el.textContent || '').trim().match(/^([\d.,]+)(.*)$/);
+      if (!match) return;
+      const target = parseFloat(match[1].replace(/,/g, ''));
+      const decimals = (match[1].split('.')[1] || '').length;
+      const grouped = match[1].includes(',');
+      const suffix = match[2] || '';
+      const io = new IntersectionObserver((entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        const start = performance.now();
+        const duration = 1100;
+        const frame = (now: number) => {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          let value = (target * eased).toFixed(decimals);
+          if (grouped) {
+            value = Number(value).toLocaleString('en-US', {
+              minimumFractionDigits: decimals,
+            });
+          }
+          el.textContent = value + suffix;
+          if (p < 1) requestAnimationFrame(frame);
+        };
+        requestAnimationFrame(frame);
+      }, { threshold: 0.6 });
+      io.observe(el);
+    });
+  }
+  document.addEventListener('astro:page-load', initCountUp);
+</script>

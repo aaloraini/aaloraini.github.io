@@ -1,0 +1,61 @@
+---
+/* Editorial ticker strip between the hero and the work section.
+   Decorative (the same facts appear in the hero), hence aria-hidden.
+   Pauses on hover; static single row under reduced motion. */
+const items = [
+  'Product Ownership',
+  'Operations at National Scale',
+  'Three Apps on the App Store',
+  'Analytics-Driven Iteration',
+  'Electronics & Embedded',
+  'Open to the Gulf & Remote',
+];
+---
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    {[0, 1].map(() => (
+      <ul class="ticker__list">
+        {items.map((t) => (
+          <li class="ticker__item">{t}<span class="ticker__dot">·</span></li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</div>
+
+<style>
+  .ticker {
+    overflow: hidden;
+    border-top: 1.5px solid var(--line-strong);
+    padding-block: 0.85rem;
+  }
+  .ticker__track {
+    display: flex;
+    width: max-content;
+  }
+  .ticker__list {
+    list-style: none;
+    display: flex;
+    flex: none;
+  }
+  .ticker__item {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .ticker__dot {
+    color: var(--accent);
+    margin-inline: 1.6rem;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .ticker__track { animation: ticker-scroll 48s linear infinite; }
+    .ticker:hover .ticker__track { animation-play-state: paused; }
+  }
+  @keyframes ticker-scroll {
+    to { transform: translateX(-50%); }
+  }
+</style>

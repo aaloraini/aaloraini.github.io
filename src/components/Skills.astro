@@ -59,7 +59,7 @@ const groups = [
     <h2 class="eyebrow"><span class="num" aria-hidden="true">03</span> Skills <span class="bar" aria-hidden="true"></span></h2>
 
     <div class="skills">
-      <div class="sgroup sgroup--lead">
+      <div class="sgroup sgroup--lead" data-reveal>
         <h3 class="sgroup__label">{lead.label}</h3>
         <ul class="pills">
           {lead.items.map((i) => <li class="pill">{i}</li>)}
@@ -67,7 +67,7 @@ const groups = [
       </div>
 
       {groups.map((g) => (
-        <div class="sgroup">
+        <div class="sgroup" data-reveal>
           <h3 class="sgroup__label">{g.label}</h3>
           <ul class="pills">
             {g.items.map((i) => <li class="pill">{i}</li>)}

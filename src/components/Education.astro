@@ -27,7 +27,7 @@ const certs = [
     <h2 class="eyebrow"><span class="num" aria-hidden="true">04</span> Education &amp; Certifications <span class="bar" aria-hidden="true"></span></h2>
 
     <div class="cols">
-      <div class="col">
+      <div class="col" data-reveal>
         <h3 class="col__label">Education</h3>
         <ul class="edu">
           {education.map((e) => (
@@ -43,7 +43,7 @@ const certs = [
         </ul>
       </div>
 
-      <div class="col">
+      <div class="col" data-reveal>
         <h3 class="col__label">Certifications</h3>
         <ul class="certs">
           {certs.map((c) => <li>{c}</li>)}

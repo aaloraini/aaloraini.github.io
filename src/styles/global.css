@@ -20,6 +20,9 @@
   --wrap: 1180px;
   --pad: clamp(1.25rem, 5vw, 5rem);
   --radius: 16px;
+
+  /* Texture */
+  --grain-opacity: 0.05;
 }
 
 /* Dark mode: auto (OS) unless the visitor forces light, plus an explicit dark override */
@@ -35,6 +38,7 @@
     --card: #1c1a16;
     --badge-bg: #f3f0e9;
     --badge-fg: #141312;
+    --grain-opacity: 0.07;
   }
 }
 :root[data-theme='dark'] {
@@ -48,6 +52,7 @@
   --card: #1c1a16;
   --badge-bg: #f3f0e9;
   --badge-fg: #141312;
+  --grain-opacity: 0.07;
 }
 
 *,
@@ -173,3 +178,39 @@ img { max-width: 100%; display: block; }
 .skip:focus { left: 0; top: 0; }
 
 :focus-visible { outline: 2.5px solid var(--accent); outline-offset: 3px; }
+
+/* ---- Texture: faint print grain over the whole page ---- */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Scroll reveals: a gentle rise-in scrubbed by each element's own
+   viewport entry. Native scroll only — nothing is hijacked. Progressive:
+   static for reduced-motion users and browsers without scroll-driven
+   animations. ---- */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* Longhands on purpose: 'animation-timeline' must not be merged into
+       the 'animation' shorthand (the shorthand can't express it and the
+       whole declaration would be dropped). */
+    [data-reveal] {
+      animation-name: reveal-rise;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 55%;
+    }
+  }
+}
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.1rem);
+  }
+}

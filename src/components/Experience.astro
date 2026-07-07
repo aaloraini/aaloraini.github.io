@@ -70,7 +70,7 @@ const roles = [
 
     <ol class="roles">
       {roles.map((r) => (
-        <li class="role">
+        <li class="role" data-reveal>
           <div class="role__meta">
             <p class="role__period">{r.period}</p>
             <p class="role__org">{r.org}</p>
@@ -93,15 +93,53 @@ const roles = [
 
 <style>
   .roles { list-style: none; position: relative; }
-  /* vertical timeline line */
+  /* vertical timeline line (z -2: under the accent fill, both under the dots) */
   .roles::before {
     content: '';
     position: absolute;
+    z-index: -2;
     left: 5px;
     top: 0.6rem;
     bottom: 0.6rem;
     width: 2px;
     background: var(--line);
+  }
+  /* The timeline draws itself in accent as the list scrolls through the
+     viewport, and each marker fills when its role is reached. Progressive:
+     browsers without scroll-driven animations keep the static line. */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .roles::after {
+        content: '';
+        position: absolute;
+        z-index: -1; /* keep the accent line under the role markers */
+        left: 5px;
+        top: 0.6rem;
+        bottom: 0.6rem;
+        width: 2px;
+        background: var(--accent);
+        transform-origin: top;
+        /* longhands: the animation shorthand cannot express a timeline */
+        animation-name: line-fill;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: view();
+        animation-range: cover 0% cover 80%;
+      }
+      .role::before {
+        animation-name: dot-fill;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: view();
+        animation-range: entry 10% entry 45%;
+      }
+      @keyframes line-fill {
+        from { transform: scaleY(0); }
+      }
+      @keyframes dot-fill {
+        to { background: var(--accent); }
+      }
+    }
   }
 
   .role {

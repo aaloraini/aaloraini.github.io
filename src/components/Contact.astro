@@ -13,14 +13,14 @@ const year = new Date().getFullYear();
   <div class="wrap">
     <h2 class="eyebrow"><span class="num" aria-hidden="true">05</span> Contact <span class="bar" aria-hidden="true"></span></h2>
 
-    <p class="contact__headline">Let's build<br />something.</p>
+    <p class="contact__headline">Let's build<br /><em>something.</em></p>
     <p class="contact__sub">
       Open to product, operations, and engineering work. The fastest way to reach me is email.
     </p>
 
     <ul class="contact__links">
       {links.map((l) => (
-        <li>
+        <li data-reveal>
           <a href={l.href} target={l.href.startsWith('mailto:') || l.href.startsWith('tel:') ? undefined : '_blank'} rel="noopener noreferrer">
             <span class="contact__label">{l.label}</span>
             <span class="contact__value">{l.value} <span aria-hidden="true">↗</span></span>
@@ -41,6 +41,10 @@ const year = new Date().getFullYear();
     font-size: clamp(3rem, 11vw, 8rem);
     letter-spacing: -0.04em;
     text-transform: uppercase;
+  }
+  .contact__headline em {
+    font-style: normal;
+    color: var(--accent);
   }
   .contact__sub {
     color: var(--muted);

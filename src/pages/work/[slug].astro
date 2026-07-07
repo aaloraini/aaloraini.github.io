@@ -80,7 +80,7 @@ const schema = {
       {cs.metrics && cs.metrics.length > 0 && (
         <ul class="cs__metrics">
           {cs.metrics.map((m) => (
-            <li>
+            <li data-reveal>
               <span class="cs__metric-val">{m.value}</span>
               <span class="cs__metric-label">{m.label}</span>
             </li>
@@ -89,7 +89,7 @@ const schema = {
       )}
 
       {cs.artifact && (
-        <figure class="cs__artifact">
+        <figure class="cs__artifact" data-reveal>
           {cs.artifact.href ? (
             <a href={cs.artifact.href} target="_blank" rel="noopener noreferrer">
               <img src={cs.artifact.src} alt={cs.artifact.alt} loading="lazy" decoding="async" />
@@ -112,7 +112,7 @@ const schema = {
 
       <ol class="spine">
         {cs.phases.map((p, i) => (
-          <li class="phase">
+          <li class="phase" data-reveal>
             <div class="phase__marker" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
             <div class="phase__body">
               <h3 class="phase__label">{p.label}</h3>
@@ -299,6 +299,25 @@ const schema = {
     font-size: 0.8rem;
     font-weight: 500;
     color: var(--ink);
+  }
+  /* Phase numbers ignite in accent as each phase is reached */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .phase__marker {
+        /* longhands: the animation shorthand cannot express a timeline */
+        animation-name: phase-ignite;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: view();
+        animation-range: entry 10% entry 50%;
+      }
+      @keyframes phase-ignite {
+        to {
+          border-color: var(--accent);
+          color: var(--accent);
+        }
+      }
+    }
   }
   .phase__label { font-size: clamp(1.2rem, 2.6vw, 1.6rem); letter-spacing: -0.02em; margin-bottom: 0.7rem; }
   .phase__text { color: var(--muted); max-width: 64ch; }
