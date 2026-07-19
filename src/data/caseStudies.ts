@@ -9,6 +9,8 @@ export type Phase = {
      labels only where a project genuinely has no such phase. */
   label: string;
   body: string[];
+  /* Optional evidence rendered inline within the phase, after its paragraphs. */
+  figure?: { src: string; alt: string; caption: string };
 };
 
 export type CaseStudy = {
@@ -43,9 +45,9 @@ export const caseStudies: CaseStudy[] = [
       { k: 'Platform', v: 'iOS' },
     ],
     summary:
-      'Ayatuk is a Quran companion I built to stay connected to the Quran on my busiest days. I treated it as a product from the first day: instrumented before launch, shipped a deliberately small MVP around a single habit, then let real engagement data decide what to build next. The launch week alone drew more than 2,000 downloads, and across the iterations that followed, week-4 retention climbed from 1.3% to over 9%.',
+      'Ayatuk is a Quran companion I built to stay connected to the Quran on my busiest days. I treated it as a product from the first day: instrumented before launch, shipped a deliberately small MVP around a single habit, then let real engagement data decide what to build next. The launch week alone drew more than 2,000 downloads, and across the iterations that followed, week-4 retention climbed from 1.3% to over 11%.',
     metrics: [
-      { value: '1.3% → 9%', label: 'week-4 retention, early cohorts to recent (Firebase)' },
+      { value: '1.3% → 11.4%', label: 'week-4 retention, early cohorts to recent (Firebase)' },
       { value: '2,000+', label: 'downloads in the MVP launch week' },
       { value: '120,000+', label: 'in-app events tracked last quarter' },
     ],
@@ -81,9 +83,15 @@ export const caseStudies: CaseStudy[] = [
       {
         label: 'Operate & iterate',
         body: [
-          'This is where the product was really made. I watched engagement continuously and let the data set priorities. Onboarding changes, the Journey, and the streak and badge system each moved the numbers, and together they lifted week-4 retention from 1.3% to over 9%, comparing early cohorts to recent ones in Firebase. In the last quarter alone the app saw around 475 users and more than 120,000 tracked events, with a clear engagement spike after the most recent update.',
+          'This is where the product was really made. I watched engagement continuously and let the data set priorities. Onboarding changes, the Journey, and the streak and badge system each moved the numbers, and together they lifted week-4 retention from 1.3% to 11.4%, comparing early cohorts to recent ones in Firebase. In the latest six-week cohort view the curve also stops decaying after the first week: week 5 holds at 16.7%, higher than week 4. In the last quarter alone the app saw around 475 users and more than 120,000 tracked events, with a clear engagement spike after the most recent update.',
           'I funded it with a premium tier that unlocks a few extras (additional Journeys, verse tafseer, and a home-screen widget for the daily verse) rather than gating the core habit, which stays free. Its job is to support development, not to wall anyone out.',
         ],
+        figure: {
+          src: '/images/ayah/retention-cohorts.png',
+          alt: 'Firebase user-activity-by-cohort chart for Ayatuk: six weekly cohorts ending Jul 18, with all-users retention of 26.0% in week 1, 10.7% in week 2, 12.0% in week 3, 11.4% in week 4, and 16.7% in week 5',
+          caption:
+            'The Firebase cohort view for the six weeks ending Jul 18, 2026. Week-4 retention sits at 11.4% across cohorts, and instead of decaying after the first week the curve flattens and bends back up, with week 5 holding at 16.7%.',
+        },
       },
       {
         label: 'Learnings',

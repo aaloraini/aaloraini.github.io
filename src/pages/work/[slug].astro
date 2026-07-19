@@ -117,6 +117,12 @@ const schema = {
             <div class="phase__body">
               <h3 class="phase__label">{p.label}</h3>
               {p.body.map((para) => <p class="phase__text">{para}</p>)}
+              {p.figure && (
+                <figure class="phase__figure">
+                  <img src={p.figure.src} alt={p.figure.alt} loading="lazy" decoding="async" />
+                  <figcaption>{p.figure.caption}</figcaption>
+                </figure>
+              )}
             </div>
           </li>
         ))}
@@ -322,6 +328,17 @@ const schema = {
   .phase__label { font-size: clamp(1.2rem, 2.6vw, 1.6rem); letter-spacing: -0.02em; margin-bottom: 0.7rem; }
   .phase__text { color: var(--muted); max-width: 64ch; }
   .phase__text + .phase__text { margin-top: 0.85rem; }
+
+  /* Inline evidence within a phase */
+  .phase__figure { margin-top: 1.5rem; max-width: 34rem; }
+  .phase__figure img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--card);
+  }
+  .phase__figure figcaption { margin-top: 0.85rem; font-size: 0.88rem; color: var(--muted); max-width: 64ch; }
 
   .cs__foot {
     display: flex;
