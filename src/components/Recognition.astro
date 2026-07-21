@@ -5,7 +5,7 @@ const quote =
 
 <section class="section recognition" id="recognition">
   <div class="wrap">
-    <h2 class="eyebrow"><span>Recognition</span> <span class="bar" aria-hidden="true"></span></h2>
+    <h2 class="eyebrow"><span class="num" aria-hidden="true">Log 03</span> Recognition <span class="bar" aria-hidden="true"></span></h2>
 
     <figure class="quote" data-reveal>
       <blockquote class="quote__text">&ldquo;{quote}&rdquo;</blockquote>
@@ -46,13 +46,15 @@ const quote =
   .quote__ar { font-weight: 700; }
   .quote__meta {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    line-height: 1.7;
+    color: var(--faint);
   }
   .quote__meta a {
     color: var(--muted);
-    border-bottom: 1px solid var(--line);
-    transition: color 0.18s ease, border-color 0.18s ease;
+    border-bottom: 1px solid var(--line-strong);
+    transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
   }
   .quote__meta a:hover { color: var(--accent); border-color: var(--accent); }
 </style>

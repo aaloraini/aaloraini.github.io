@@ -56,21 +56,21 @@ const groups = [
 
 <section class="section" id="skills">
   <div class="wrap">
-    <h2 class="eyebrow"><span class="num" aria-hidden="true">03</span> Skills <span class="bar" aria-hidden="true"></span></h2>
+    <h2 class="eyebrow"><span class="num" aria-hidden="true">Log 04</span> Skills <span class="bar" aria-hidden="true"></span></h2>
 
     <div class="skills">
       <div class="sgroup sgroup--lead" data-reveal>
         <h3 class="sgroup__label">{lead.label}</h3>
-        <ul class="pills">
-          {lead.items.map((i) => <li class="pill">{i}</li>)}
+        <ul class="chips">
+          {lead.items.map((i) => <li class="tag">{i}</li>)}
         </ul>
       </div>
 
       {groups.map((g) => (
         <div class="sgroup" data-reveal>
           <h3 class="sgroup__label">{g.label}</h3>
-          <ul class="pills">
-            {g.items.map((i) => <li class="pill">{i}</li>)}
+          <ul class="chips">
+            {g.items.map((i) => <li class="tag">{i}</li>)}
           </ul>
         </div>
       ))}
@@ -89,23 +89,19 @@ const groups = [
     font-size: 1.4rem;
     letter-spacing: -0.01em;
     padding-bottom: 0.9rem;
-    border-bottom: 1.5px solid var(--line-strong);
+    border-bottom: var(--border-mid) solid var(--line-strong);
     margin-bottom: 1.25rem;
   }
-  .pills {
+  .chips {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  .pill {
-    font-family: var(--font-body);
-    font-size: 0.92rem;
-    color: var(--ink);
-    border: 1px solid var(--line);
-    border-radius: 100px;
-    padding: 0.45rem 0.9rem;
-    transition: border-color 0.18s ease;
+  /* Skill chips are Tags. Long labels must wrap rather than overflow. */
+  .chips .tag {
+    white-space: normal;
+    transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
   }
-  .pill:hover { border-color: var(--ink); }
+  .chips .tag:hover { border-color: var(--line-strong); color: var(--ink); }
 </style>

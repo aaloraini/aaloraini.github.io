@@ -8,7 +8,11 @@ const stats = [
 
 <header class="hero">
   <div class="wrap">
-    <p class="kicker"><span class="kicker__dot" aria-hidden="true"></span>Product · Operations · Engineering · Open to the Gulf &amp; remote</p>
+    <p class="kicker">
+      <span class="kicker__dot" aria-hidden="true"></span>Product · Operations · Engineering
+      <span class="kicker__coords">· Riyadh 24.7136° N, 46.6753° E</span>
+      <span class="kicker__status">· Status: open to the Gulf &amp; remote</span>
+    </p>
     <h1 class="name">
       <span class="name__line"><span class="name__word">Abdulhakim</span></span>
       <span class="name__line"><span class="name__word name__word--stroke">Aloraini</span></span>
@@ -48,20 +52,28 @@ const stats = [
     padding-block: clamp(3rem, 9vw, 7rem) clamp(2.5rem, 6vw, 4rem);
   }
   .kicker {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.14em;
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--muted);
     margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
   }
   .kicker__dot {
     display: inline-block;
-    width: 0.55em;
-    height: 0.55em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
     background: var(--accent);
-    margin-right: 0.9em;
+    flex: none;
   }
+  /* Coordinates and a status line stand in for a tagline. */
+  .kicker__coords,
+  .kicker__status { color: var(--faint); }
   .name {
     font-size: clamp(3.25rem, 13vw, 10.5rem);
     letter-spacing: -0.035em;
@@ -137,26 +149,32 @@ const stats = [
     gap: 0.85rem;
     margin-top: 2rem;
   }
+  /* Instrument readings, not marketing: display-weight values over
+     mono, uppercase captions. */
   .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin-top: clamp(3rem, 7vw, 5rem);
-    border-top: 1.5px solid var(--line-strong);
+    border-top: var(--border-mid) solid var(--line-strong);
     padding-top: 1.75rem;
   }
   .stat dt {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: clamp(2.25rem, 5vw, 3.5rem);
-    letter-spacing: -0.03em;
-    color: var(--accent);
+    letter-spacing: var(--tracking-tight);
+    color: var(--ink);
   }
   .stat dd {
-    font-size: 0.9rem;
-    color: var(--muted);
-    margin-top: 0.35rem;
-    max-width: 24ch;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    color: var(--faint);
+    margin-top: 0.5rem;
+    max-width: 26ch;
   }
   @media (max-width: 640px) {
     .stats { grid-template-columns: 1fr; gap: 1.1rem; }

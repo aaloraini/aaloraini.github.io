@@ -160,24 +160,30 @@ const schema = {
     align-items: center;
     gap: 0.45rem;
     font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    letter-spacing: var(--tracking-btn);
     text-transform: uppercase;
     color: var(--muted);
-    transition: color 0.18s ease, gap 0.18s ease;
+    transition: color var(--dur-fast) var(--ease), gap var(--dur-fast) var(--ease);
   }
   .cs__back:hover { color: var(--accent); gap: 0.7rem; }
 
   .cs__head { margin-top: clamp(1.75rem, 4vw, 2.75rem); }
   .cs__eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.16em;
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--sand);
   }
   .cs__title { display: flex; align-items: center; gap: 1.25rem; margin-top: 1rem; }
-  .cs__icon { width: clamp(64px, 12vw, 88px); height: auto; border-radius: 22.5%; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14); flex: none; }
+  .cs__icon {
+    width: clamp(64px, 12vw, 88px);
+    height: auto;
+    border-radius: 22.5%;
+    border: var(--border-hair) solid var(--line);
+    flex: none;
+  }
   .cs__name { font-size: clamp(2rem, 6vw, 3.4rem); letter-spacing: -0.03em; line-height: 1.02; }
   .cs__tagline { color: var(--accent); font-family: var(--font-display); font-weight: 500; font-size: clamp(1.05rem, 2vw, 1.3rem); margin-top: 0.4rem; }
 
@@ -199,28 +205,34 @@ const schema = {
   }
   .cs__meta-row dt {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
+    font-size: 0.68rem;
+    letter-spacing: var(--tracking-tag);
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--sand);
   }
-  .cs__meta-row dd { font-family: var(--font-display); font-weight: 600; font-size: 1rem; margin-top: 0.3rem; }
+  .cs__meta-row dd { font-family: var(--font-display); font-weight: 600; font-size: 1rem; margin-top: 0.35rem; }
 
   .cs__links { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; margin-top: clamp(1.5rem, 4vw, 2.25rem); }
   .appstore {
-    display: inline-flex; align-items: center; gap: 0.4rem;
+    display: inline-flex; align-items: center; gap: 0.45rem;
     background: var(--badge-bg); color: var(--badge-fg);
-    padding: 0.45rem 0.85rem; border-radius: 10px;
-    font-family: var(--font-display); font-weight: 600; font-size: 0.88rem;
-    transition: filter 0.18s ease, transform 0.18s ease;
+    padding: 0.6rem 1rem;
+    border: var(--border-mid) solid var(--badge-bg);
+    border-radius: var(--radius-btn);
+    font-family: var(--font-mono); font-weight: 500; font-size: var(--text-btn);
+    letter-spacing: var(--tracking-btn); text-transform: uppercase; line-height: 1;
+    transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease),
+      color var(--dur-fast) var(--ease);
   }
-  .appstore:hover { transform: translateY(-1px); filter: brightness(0.92); }
-  .appstore svg { width: 15px; height: auto; display: block; }
+  .appstore:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .appstore svg { width: 14px; height: auto; display: block; }
   .cs__link {
-    display: inline-flex; align-items: center; gap: 0.3rem;
-    font-family: var(--font-display); font-weight: 600; font-size: 0.92rem;
-    border-bottom: 2px solid var(--ink); padding-bottom: 1px;
-    transition: color 0.18s ease, border-color 0.18s ease;
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: var(--tracking-btn); text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line-strong); padding-bottom: 2px;
+    transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
   }
   .cs__link:hover { color: var(--accent); border-color: var(--accent); }
 
@@ -237,8 +249,15 @@ const schema = {
     margin-top: clamp(2.5rem, 6vw, 3.5rem);
   }
   .cs__metrics li { background: var(--card); padding: clamp(1.25rem, 3vw, 1.75rem); display: flex; flex-direction: column; gap: 0.5rem; }
-  .cs__metric-val { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 3.5vw, 2.1rem); letter-spacing: -0.02em; line-height: 1; }
-  .cs__metric-label { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+  .cs__metric-val { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 3.5vw, 2.1rem); letter-spacing: var(--tracking-tight); line-height: 1; }
+  .cs__metric-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+    line-height: 1.5;
+  }
   @media (max-width: 640px) {
     .cs__metrics { grid-template-columns: 1fr; }
   }
@@ -266,14 +285,14 @@ const schema = {
     gap: 0.85rem;
     font-family: var(--font-mono);
     font-weight: 400;
-    font-size: 0.8rem;
-    letter-spacing: 0.16em;
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--muted);
     margin-top: clamp(3rem, 8vw, 5rem);
     margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
   }
-  .cs__spine-label .num { color: var(--accent); font-weight: 600; }
+  .cs__spine-label .num { color: var(--sand); font-weight: 500; }
   .cs__spine-label .bar { flex: 1; height: 1px; background: var(--line); }
 
   /* Lifecycle spine: numbered phases on a single vertical line */
@@ -289,6 +308,7 @@ const schema = {
   }
   .phase { position: relative; padding-left: 3.75rem; padding-bottom: clamp(2rem, 5vw, 3rem); }
   .phase:last-child { padding-bottom: 0; }
+  /* Tool-like markers: tight corners, not circles. */
   .phase__marker {
     position: absolute;
     left: 0;
@@ -298,13 +318,14 @@ const schema = {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
+    border-radius: var(--radius);
     background: var(--bg);
-    border: 1.5px solid var(--line-strong);
+    border: var(--border-mid) solid var(--line-strong);
     font-family: var(--font-mono);
     font-size: 0.8rem;
     font-weight: 500;
-    color: var(--ink);
+    letter-spacing: 0.06em;
+    color: var(--sand);
   }
   /* Phase numbers ignite in accent as each phase is reached */
   @media (prefers-reduced-motion: no-preference) {

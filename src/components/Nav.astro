@@ -8,7 +8,11 @@ const links = [
 
 <header class="nav">
   <div class="nav__inner wrap">
-    <a class="nav__brand" href="/">Abdulhakim Aloraini</a>
+    <a class="nav__brand" href="/">
+      <img class="nav__mark" src="/logo-mark.svg" alt="" width="28" height="28" />
+      <span class="nav__wordmark">Aloraini<span class="nav__star" aria-hidden="true">*</span></span>
+      <span class="sr-only">Abdulhakim Aloraini, home</span>
+    </a>
     <div class="nav__right">
       <nav class="nav__links" aria-label="Primary">
         {links.map((l) => <a href={l.href}>{l.label}</a>)}
@@ -33,8 +37,9 @@ const links = [
     const btn = document.querySelector('[data-theme-toggle]');
     if (!btn) return;
     const root = document.documentElement;
-    const systemDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const effective = () => root.dataset.theme || (systemDark() ? 'dark' : 'light');
+    // Dark is the default: only an explicit OS light preference flips it.
+    const systemLight = () => window.matchMedia('(prefers-color-scheme: light)').matches;
+    const effective = () => root.dataset.theme || (systemLight() ? 'light' : 'dark');
     const sync = () => btn.setAttribute('aria-pressed', String(effective() === 'dark'));
     sync();
     btn.addEventListener('click', () => {
@@ -93,12 +98,27 @@ const links = [
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
   }
+  /* The wordmark is ALORAINI* — the asterisk resolves to the footnote
+     in the page footer ("hakim — the wise one"). */
   .nav__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .nav__mark {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: var(--radius);
+    flex: none;
+  }
+  .nav__wordmark {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.05rem;
     letter-spacing: -0.01em;
+    text-transform: uppercase;
   }
+  .nav__star { color: var(--accent); }
   .nav__right {
     display: flex;
     align-items: center;
@@ -111,11 +131,11 @@ const links = [
   .nav__links a {
     position: relative;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
-    transition: color 0.18s ease;
+    transition: color var(--dur-fast) var(--ease);
   }
   .nav__links a::after {
     content: '';
@@ -132,6 +152,7 @@ const links = [
   .nav__links a:hover { color: var(--ink); }
   .nav__links a:hover::after { transform: scaleX(1); }
 
+  /* Tool-like, not a pill: 3px corners on a hairline square. */
   .nav__theme {
     display: inline-flex;
     align-items: center;
@@ -139,32 +160,34 @@ const links = [
     width: 2.1rem;
     height: 2.1rem;
     flex: none;
-    border-radius: 50%;
+    border-radius: var(--radius-btn);
     border: 1px solid var(--line);
     background: transparent;
-    color: var(--ink);
+    color: var(--muted);
     cursor: pointer;
-    transition: border-color 0.18s ease, color 0.18s ease;
+    transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
   }
-  .nav__theme:hover { border-color: var(--ink); color: var(--accent); }
+  .nav__theme:hover { border-color: var(--accent); color: var(--accent); }
   .nav__icon { width: 1.05rem; height: 1.05rem; }
 
-  /* Icon reflects the effective theme (mirror of the token rules) */
-  .nav__icon--sun { display: none; }
-  .nav__icon--moon { display: block; }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) .nav__icon--sun { display: block; }
-    :root:not([data-theme='light']) .nav__icon--moon { display: none; }
+  /* Icon reflects the effective theme (mirror of the token rules).
+     Dark is the default, so the sun — "switch to light" — shows first. */
+  .nav__icon--sun { display: block; }
+  .nav__icon--moon { display: none; }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme='dark']) .nav__icon--sun { display: none; }
+    :root:not([data-theme='dark']) .nav__icon--moon { display: block; }
   }
-  :root[data-theme='dark'] .nav__icon--sun { display: block; }
-  :root[data-theme='dark'] .nav__icon--moon { display: none; }
   :root[data-theme='light'] .nav__icon--sun { display: none; }
   :root[data-theme='light'] .nav__icon--moon { display: block; }
+  :root[data-theme='dark'] .nav__icon--sun { display: block; }
+  :root[data-theme='dark'] .nav__icon--moon { display: none; }
 
   @media (max-width: 460px) {
-    .nav__brand { font-size: 0.9rem; }
+    .nav__wordmark { font-size: 0.95rem; }
+    .nav__mark { width: 1.5rem; height: 1.5rem; }
     .nav__links { gap: 1rem; }
-    .nav__links a { font-size: 0.72rem; }
+    .nav__links a { font-size: 0.66rem; letter-spacing: 0.08em; }
     .nav__right { gap: 0.85rem; }
   }
 </style>

@@ -24,7 +24,7 @@ const certs = [
 
 <section class="section" id="education">
   <div class="wrap">
-    <h2 class="eyebrow"><span class="num" aria-hidden="true">04</span> Education &amp; Certifications <span class="bar" aria-hidden="true"></span></h2>
+    <h2 class="eyebrow"><span class="num" aria-hidden="true">Log 05</span> Education &amp; Certifications <span class="bar" aria-hidden="true"></span></h2>
 
     <div class="cols">
       <div class="col" data-reveal>
@@ -62,8 +62,8 @@ const certs = [
   .col__label {
     font-family: var(--font-mono);
     font-weight: 400;
-    font-size: 0.8rem;
-    letter-spacing: 0.16em;
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--muted);
     margin-bottom: 1.4rem;
@@ -78,8 +78,10 @@ const certs = [
   .edu__school { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; }
   .edu__period {
     font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--accent);
+    font-size: 0.72rem;
+    letter-spacing: var(--tracking-tag);
+    text-transform: uppercase;
+    color: var(--sand);
     white-space: nowrap;
   }
   .edu__detail { margin-top: 0.35rem; color: var(--ink); }
@@ -98,7 +100,7 @@ const certs = [
     top: 0.65em;
     width: 0.5rem;
     height: 1.5px;
-    background: var(--accent);
+    background: var(--sand);
   }
 
   @media (max-width: 640px) {

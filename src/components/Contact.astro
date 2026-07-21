@@ -11,7 +11,7 @@ const year = new Date().getFullYear();
 
 <section class="section contact" id="contact">
   <div class="wrap">
-    <h2 class="eyebrow"><span class="num" aria-hidden="true">05</span> Contact <span class="bar" aria-hidden="true"></span></h2>
+    <h2 class="eyebrow"><span class="num" aria-hidden="true">Log 06</span> Contact <span class="bar" aria-hidden="true"></span></h2>
 
     <p class="contact__headline">Let's build<br /><em>something.</em></p>
     <p class="contact__sub">
@@ -30,8 +30,11 @@ const year = new Date().getFullYear();
     </ul>
 
     <footer class="foot">
-      <span>© {year} Abdulhakim Aloraini</span>
-      <span>Built with Astro · Riyadh / Kuala Lumpur</span>
+      <p class="foot__note"><span class="foot__star" aria-hidden="true">*</span>hakim, the wise one.</p>
+      <div class="foot__row">
+        <span>© {year} Abdulhakim Aloraini</span>
+        <span>Built with Astro · Riyadh / Kuala Lumpur</span>
+      </div>
     </footer>
   </div>
 </section>
@@ -69,8 +72,8 @@ const year = new Date().getFullYear();
   .contact__links a:hover { padding-left: 1rem; color: var(--accent); }
   .contact__label {
     font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-tag);
     text-transform: uppercase;
     color: var(--muted);
   }
@@ -84,13 +87,19 @@ const year = new Date().getFullYear();
   }
 
   .foot {
+    margin-top: clamp(3rem, 7vw, 5rem);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--faint);
+  }
+  /* Where the ALORAINI* wordmark's asterisk resolves. */
+  .foot__note { margin-bottom: 1.1rem; }
+  .foot__star { color: var(--accent); }
+  .foot__row {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem 2rem;
     justify-content: space-between;
-    margin-top: clamp(3rem, 7vw, 5rem);
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--faint);
   }
 </style>

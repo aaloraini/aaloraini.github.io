@@ -5,7 +5,7 @@ import ProjectCard from './ProjectCard.astro';
 
 <section class="section work" id="work">
   <div class="wrap">
-    <h2 class="eyebrow"><span class="num" aria-hidden="true">01</span> Selected work <span class="bar" aria-hidden="true"></span></h2>
+    <h2 class="eyebrow"><span class="num" aria-hidden="true">Log 01</span> Selected work <span class="bar" aria-hidden="true"></span></h2>
 
     <div class="stack">
       {featured.map((project, i) => (
@@ -15,27 +15,28 @@ import ProjectCard from './ProjectCard.astro';
       ))}
     </div>
 
-    <h3 class="more__heading">Also built</h3>
+    <h3 class="more__heading">Project log</h3>
     <ul class="more">
-      {more.map((p) => (
+      {more.map((p, i) => (
         <li class="more__item" data-reveal>
-          <div class="more__top">
-            <h4 class="more__name">{p.name}</h4>
-            {p.status && <span class="more__status">{p.status}</span>}
-          </div>
-          <p class="more__tagline">{p.tagline}</p>
-          <div class="more__foot">
+          <span class="more__entry" aria-hidden="true">{String(featured.length + i + 1).padStart(2, '0')}</span>
+          <div class="more__body">
+            <div class="more__top">
+              <h4 class="more__name">{p.name}</h4>
+              {p.status && <span class="badge">{p.status}</span>}
+            </div>
+            <p class="more__tagline">{p.tagline}</p>
             <ul class="more__tags">
               {p.tags.map((t) => <li class="tag">{t}</li>)}
             </ul>
-            {p.links && p.links.length > 0 && (
-              <div class="more__links">
-                {p.links.map((l) => (
-                  <a href={l.href} target="_blank" rel="noopener noreferrer">{l.label} ↗</a>
-                ))}
-              </div>
-            )}
           </div>
+          {p.links && p.links.length > 0 && (
+            <div class="more__links">
+              {p.links.map((l) => (
+                <a href={l.href} target="_blank" rel="noopener noreferrer">{l.label} <span aria-hidden="true">↗</span></a>
+              ))}
+            </div>
+          )}
         </li>
       ))}
     </ul>
@@ -65,61 +66,53 @@ import ProjectCard from './ProjectCard.astro';
   .more__heading {
     font-family: var(--font-mono);
     font-weight: 400;
-    font-size: 0.8rem;
-    letter-spacing: 0.16em;
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--muted);
     margin-top: clamp(3rem, 7vw, 5rem);
     margin-bottom: 1.5rem;
   }
-  .more {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-  }
+  /* Logbook rows: a sand entry number, the entry, then its links. */
+  .more { list-style: none; }
   .more__item {
-    background: var(--bg);
-    padding: clamp(1.25rem, 3vw, 1.75rem);
     display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    transition: background-color 0.2s ease;
-  }
-  .more__item:hover { background: var(--card); }
-  .more__top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; }
-  .more__name { font-size: 1.3rem; letter-spacing: -0.01em; }
-  .more__status {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--accent);
-    white-space: nowrap;
-  }
-  .more__tagline { color: var(--muted); font-size: 0.95rem; flex: 1; }
-  .more__foot {
-    display: flex;
+    align-items: flex-start;
+    gap: clamp(1rem, 3vw, 2rem);
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    margin-top: 0.4rem;
+    padding-block: 1.3rem;
+    border-top: var(--border-hair) solid var(--line);
   }
-  .more__tags { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .more__links { display: flex; gap: 0.9rem; }
+  .more__item:last-child { border-bottom: var(--border-hair) solid var(--line); }
+  .more__entry {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    color: var(--sand);
+    padding-top: 0.35rem;
+    min-width: 2.5rem;
+    flex: none;
+  }
+  .more__body { flex: 1; min-width: 220px; }
+  .more__top { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
+  .more__name { font-size: 1.15rem; letter-spacing: -0.01em; }
+  .more__tagline { color: var(--muted); font-size: 0.95rem; margin-top: 0.3rem; }
+  .more__tags { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.85rem; }
+  .more__links { display: flex; flex-wrap: wrap; gap: 1rem; padding-top: 0.35rem; }
   .more__links a {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.85rem;
-    border-bottom: 2px solid var(--ink);
-    transition: color 0.18s ease, border-color 0.18s ease;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: var(--tracking-btn);
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 2px;
+    transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
   }
   .more__links a:hover { color: var(--accent); border-color: var(--accent); }
 
-  @media (max-width: 680px) {
-    .more { grid-template-columns: 1fr; }
+  @media (max-width: 560px) {
+    .more__item { gap: 0.85rem; }
+    .more__entry { min-width: 0; padding-top: 0; }
   }
 </style>

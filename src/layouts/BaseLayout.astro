@@ -1,5 +1,6 @@
 ---
-import '@fontsource-variable/inter';
+import '@fontsource-variable/ibm-plex-sans';
+import '@fontsource-variable/jetbrains-mono';
 import '@fontsource-variable/space-grotesk';
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
@@ -46,11 +47,13 @@ const ogImage = new URL('og.png', site).href;
     <meta property="og:image:alt" content="Abdulhakim Aloraini, Product & Operations Leader" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf8f3" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141312" />
+    {/* Dark is the default; the light meta wins only when the OS asks for it.
+        First match wins, so the media-less fallback goes last. */}
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f1ede3" />
+    <meta name="theme-color" content="#14191b" />
     <script is:inline>
       (function () {
-        var colors = { light: '#faf8f3', dark: '#141312' };
+        var colors = { light: '#f1ede3', dark: '#14191b' };
         function apply(t) {
           document.documentElement.dataset.theme = t;
           var metas = document.querySelectorAll('meta[name="theme-color"]');

@@ -66,7 +66,7 @@ const roles = [
 
 <section class="section" id="experience">
   <div class="wrap">
-    <h2 class="eyebrow"><span class="num" aria-hidden="true">02</span> Experience <span class="bar" aria-hidden="true"></span></h2>
+    <h2 class="eyebrow"><span class="num" aria-hidden="true">Log 02</span> Experience <span class="bar" aria-hidden="true"></span></h2>
 
     <ol class="roles">
       {roles.map((r) => (
@@ -170,9 +170,10 @@ const roles = [
 
   .role__period {
     font-family: var(--font-mono);
-    font-size: 0.82rem;
-    letter-spacing: 0.04em;
-    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: var(--tracking-tag);
+    text-transform: uppercase;
+    color: var(--sand);
   }
   .role__org {
     font-family: var(--font-display);
@@ -202,7 +203,7 @@ const roles = [
     top: 0.65em;
     width: 0.5rem;
     height: 1.5px;
-    background: var(--accent);
+    background: var(--sand);
   }
 
   @media (max-width: 720px) {
