@@ -20,7 +20,7 @@ const {
   schema,
 } = Astro.props;
 
-const site = Astro.site?.href ?? 'https://aaloraini.github.io/';
+const site = Astro.site?.href ?? 'https://aaloraini.com/';
 const canonical = new URL(Astro.url.pathname, site).href;
 const ogImage = new URL('og.png', site).href;
 ---

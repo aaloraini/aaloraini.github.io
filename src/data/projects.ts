@@ -88,7 +88,7 @@ export const more: Project[] = [
     description: '',
     tags: ['Web', 'JavaScript'],
     links: [
-      { label: 'Open live', href: 'https://aaloraini.github.io/ucsi-cgpa-calculator/' },
+      { label: 'Open live', href: 'https://aaloraini.com/ucsi-cgpa-calculator/' },
       { label: 'GitHub', href: 'https://github.com/aaloraini/ucsi-cgpa-calculator' },
     ],
   },
