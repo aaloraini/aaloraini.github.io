@@ -17,13 +17,17 @@ export type Project = {
 export const featured: Project[] = [
   {
     name: 'Logic Circuits Simulator',
-    tagline: 'Digital logic design for iPhone, iPad & Mac',
+    tagline: 'Digital logic design for Apple, Windows & Android',
     focus: 'Focus: product ownership, user research, and engineering',
     description:
-      "It started as a conversation with my digital-electronics professor about what students should use to practice. The options all fell short: Tinkercad was too steep for juniors, Multisim sat behind a subscription, and the iPad apps most of us carried were outdated, pricey, or ad-filled. So I proposed building the tool we were missing. v1 covered the fundamentals; v2 improved performance and UX and added sharing and truth tables; for v3 I rebuilt the app from scratch to cover the whole curriculum, including clocks, flip-flops, and Karnaugh maps. It is live, used by students, and shaped by an agile loop of direct feedback from users and testers.",
+      "It started as a conversation with my digital-electronics professor about what students should use to practice. The options all fell short: Tinkercad was too steep for juniors, Multisim sat behind a subscription, and the iPad apps most of us carried were outdated, pricey, or ad-filled. So I proposed building the tool we were missing. v1 covered the fundamentals; v2 improved performance and UX and added sharing and truth tables; for v3 I rebuilt the app from scratch to cover the whole curriculum, including clocks, flip-flops, and Karnaugh maps. To reach students without Apple hardware, I hired and managed a contractor to build a Flutter port for 3.0.2: Windows is out on the Microsoft Store and Android is in Google Play review. It is live, used by students, has a site of its own at lcs.aaloraini.com, and is shaped by an agile loop of direct feedback from users and testers.",
     category: 'App',
-    tags: ['Swift', 'SwiftUI', 'iOS · iPadOS · macOS'],
-    links: [{ label: 'App Store', href: 'https://apps.apple.com/app/id6748374538' }],
+    tags: ['Swift', 'SwiftUI', 'Flutter', 'Apple · Windows · Android'],
+    links: [
+      { label: 'App Store', href: 'https://apps.apple.com/app/id6748374538' },
+      { label: 'Microsoft Store', href: 'https://apps.microsoft.com/detail/9P54VDDTJRDP' },
+      { label: 'Website', href: 'https://lcs.aaloraini.com/' },
+    ],
     icon: { src: '/images/lcs/icon.png', alt: 'Logic Circuits Simulator app icon' },
     caseStudy: 'logic-circuits-simulator',
   },

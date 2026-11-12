@@ -108,19 +108,19 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'logic-circuits-simulator',
     name: 'Logic Circuits Simulator',
-    tagline: 'Digital logic design for iPhone, iPad & Mac',
+    tagline: 'Digital logic design for Apple, Windows & Android',
     category: 'App',
     meta: [
-      { k: 'Role', v: 'Product owner, designer, and engineer' },
+      { k: 'Role', v: 'Founder, product lead, and engineer' },
       { k: 'Timeline', v: 'May 2025 to present' },
-      { k: 'Platforms', v: 'iOS, iPadOS, macOS' },
+      { k: 'Platforms', v: 'iOS, iPadOS, macOS, Windows, Android' },
     ],
     summary:
-      'Logic Circuits Simulator is a digital-logic design tool for iPhone, iPad, and Mac that I built because the options my classmates and I had were too hard, too expensive, or too dated. It started from a conversation with my digital-electronics professor, grew through three versions shaped by direct, continuous feedback from him and from students, and is now the tool he uses officially to teach, practice, and collect assignments, across three semesters and counting.',
+      'Logic Circuits Simulator is a digital-logic design tool I built because the options my classmates and I had were too hard, too expensive, or too dated. It started from a conversation with my digital-electronics professor, grew through three versions shaped by direct, continuous feedback from him and from students, and is now the tool he uses officially to teach, practice, and collect assignments, across three semesters and counting. It has since moved beyond Apple: I hired and managed a contractor to build a Flutter port for 3.0.2, shipped Windows on the Microsoft Store, put Android into Google Play review, and launched a marketing site of its own.',
     metrics: [
       { value: '3 semesters', label: 'adopted as the official course tool, and counting' },
       { value: '4.2 ★', label: 'rating on the App Store' },
-      { value: '3 platforms', label: 'iPhone, iPad, and Mac from one codebase' },
+      { value: '5 platforms', label: 'iPhone, iPad, Mac, Windows, and Android' },
     ],
     phases: [
       {
@@ -135,6 +135,7 @@ export const caseStudies: CaseStudy[] = [
         body: [
           'I proposed building it, and then I owned it: the product direction, the interface design, the Swift and SwiftUI engineering across iPhone, iPad, and Mac, and the release.',
           'Just as important, I owned the feedback loop, working directly and continuously with my professor and with student testers so the app matched how the curriculum is actually taught.',
+          'As the product outgrew what I could build alone, the role grew with it. For the cross-platform expansion I moved from writing the code to specifying it: hiring and managing the contractor who built it, and holding the result to the standard the Apple version had set.',
         ],
       },
       {
@@ -149,13 +150,15 @@ export const caseStudies: CaseStudy[] = [
         body: [
           'I moved quickly from the start. Development began in May 2025, the first test build and round of feedback came in June, and v1 shipped to the App Store in July. v1 covered the fundamentals; v2 improved performance and the interface and added sharing and truth tables; for v3, the version live today, I rebuilt the app from scratch to cover the full curriculum, including clocks, flip-flops, and Karnaugh maps.',
           'The same codebase ships to iPhone, iPad, and Mac, so a student can practice on whatever device they have with them.',
+          'Reaching the students who do not own Apple hardware meant a second codebase, and rather than stretch myself across it I scoped the work and brought in help. I hired a contractor to build a Flutter port for 3.0.2, wrote the spec, set the priorities, and reviewed each build against the Swift original so the two versions would not drift. Windows shipped on the Microsoft Store, and the Android build is in Google Play review on its way to production.',
         ],
       },
       {
         label: 'Operate & iterate',
         body: [
-          'The app is live on the App Store, holds a 4.2-star rating, and my professor has adopted it officially: for three continuous semesters and counting, students use it to practice, follow his explanations, and submit their assignments. With around 155 downloads it is a focused audience, but a committed one that uses the app exactly as it was meant to be used.',
+          'The app is live on the App Store, holds a 4.2-star rating, and my professor has adopted it officially: for three continuous semesters and counting, students use it to practice, follow his explanations, and submit their assignments. It is now past 250 downloads on Apple platforms, and monthly downloads have climbed steadily rather than spiking and fading. Windows is too recent to read anything into yet.',
           'I run it as an agile loop: real feedback from that audience feeds directly into the next version. That loop is what took it from a fundamentals tool to one that covers the full curriculum, and it keeps shaping where the app goes next.',
+          'Shipping on more platforms also meant the product needed a front door of its own, so I launched lcs.aaloraini.com. Students and lecturers can find the app, see what it does, and get to the right build for their device instead of hunting through a store listing.',
         ],
       },
       {
@@ -163,10 +166,15 @@ export const caseStudies: CaseStudy[] = [
         body: [
           'Starting from a real, observed problem, and validating it with someone who teaches the material, meant I never had to guess whether the app was worth building.',
           'Shipping narrow and letting user feedback pull the roadmap kept each version focused, and committing to a full rebuild for v3 paid off more than patching the old version ever would have.',
+          'Outsourcing the port taught me the part I had not done before: what comes back is set by the quality of the spec and the review cadence, not by the handover. Writing the requirements properly and checking every build against the original is what kept the two versions in step.',
         ],
       },
     ],
-    links: [{ label: 'App Store', href: 'https://apps.apple.com/app/id6748374538' }],
+    links: [
+      { label: 'App Store', href: 'https://apps.apple.com/app/id6748374538' },
+      { label: 'Microsoft Store', href: 'https://apps.microsoft.com/detail/9P54VDDTJRDP' },
+      { label: 'Website', href: 'https://lcs.aaloraini.com/' },
+    ],
     icon: { src: '/images/lcs/icon.png', alt: 'Logic Circuits Simulator app icon' },
   },
 
